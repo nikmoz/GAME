@@ -9,6 +9,7 @@ int main() {
 
 	Test->AddCharacter(move(Uther));
 	Test->AddCharacter(move(AUther));
+
 	std::thread GUI(&Scene::RenderScene, Test);
 	GUI.join();
 

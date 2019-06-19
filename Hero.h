@@ -15,9 +15,9 @@ public:
 	HeroeDefs::Side Side;
 	void TakeTurn();
 
-	sf::Sprite Sprite;
+	sf::Sprite Sprite;//TODO: Think how to put it aside from gameplay part
 	~Hero() = default;
 private:
-	sf::Texture Texture;
+	sf::Texture Texture;//TODO: Think how to put it aside from gameplay part
 };
 
