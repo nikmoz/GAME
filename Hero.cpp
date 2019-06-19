@@ -11,5 +11,8 @@ Hero::Hero(std::string TexturePath, sf::IntRect StartRect, HeroeDefs::Side Side)
 	//Game init
 
 }
+void Hero::TakeTurn() {
+
+}
 
 
