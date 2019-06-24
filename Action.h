@@ -1,11 +1,11 @@
 #pragma once
+#include "Game.h"
 #include "Hero.h"
 #include <iostream>
-#include "Game.h"
 class Action
 {
 public:
-	virtual ~Action() {};
+	virtual ~Action()=default;
 	virtual void execute(Hero& actor)=0;
 };
 

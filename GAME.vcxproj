@@ -140,8 +140,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Action.cpp" />
-    <ClCompile Include="ActionFactory.cpp" />
+    <ClCompile Include="DOMParser.cpp" />
+    <ClCompile Include="ExeptionHandler.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GraphicHero.cpp" />
     <ClCompile Include="Hero.cpp" />
@@ -150,13 +150,16 @@
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="NameAction.cpp" />
     <ClCompile Include="SideAction.cpp" />
+    <ClCompile Include="TagElement.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".clang-tidy" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Action.h" />
-    <ClInclude Include="ActionFactory.h" />
+    <ClInclude Include="DOMParser.h" />
+    <ClInclude Include="Element.h" />
+    <ClInclude Include="ExeptionHandler.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GraphicHero.h" />
     <ClInclude Include="Hero.h" />
@@ -164,6 +167,7 @@
     <ClInclude Include="Scene.h" />
     <ClInclude Include="NameAction.h" />
     <ClInclude Include="SideAction.h" />
+    <ClInclude Include="TagElement.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\img\sorlosheet.png" />

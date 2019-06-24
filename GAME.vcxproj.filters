@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\XML-parser">
+      <UniqueIdentifier>{af39235a-ef73-4d04-ba80-578582f038db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Actions">
+      <UniqueIdentifier>{138eff8e-0bc7-47bb-b98d-09f4d939aa36}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -33,17 +39,20 @@
     <ClCompile Include="GraphicHero.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Action.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="ExeptionHandler.cpp">
+      <Filter>Header Files\XML-parser</Filter>
     </ClCompile>
-    <ClCompile Include="NameAction.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="DOMParser.cpp">
+      <Filter>Header Files\XML-parser</Filter>
+    </ClCompile>
+    <ClCompile Include="TagElement.cpp">
+      <Filter>Header Files\XML-parser</Filter>
     </ClCompile>
     <ClCompile Include="SideAction.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files\Actions</Filter>
     </ClCompile>
-    <ClCompile Include="ActionFactory.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="NameAction.cpp">
+      <Filter>Header Files\Actions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -65,17 +74,26 @@
     <ClInclude Include="GraphicHero.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DOMParser.h">
+      <Filter>Header Files\XML-parser</Filter>
+    </ClInclude>
+    <ClInclude Include="TagElement.h">
+      <Filter>Header Files\XML-parser</Filter>
+    </ClInclude>
+    <ClInclude Include="ExeptionHandler.h">
+      <Filter>Header Files\XML-parser</Filter>
+    </ClInclude>
+    <ClInclude Include="Element.h">
+      <Filter>Header Files\XML-parser</Filter>
+    </ClInclude>
     <ClInclude Include="Action.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Actions</Filter>
     </ClInclude>
     <ClInclude Include="NameAction.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Actions</Filter>
     </ClInclude>
     <ClInclude Include="SideAction.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ActionFactory.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Actions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
