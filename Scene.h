@@ -10,7 +10,6 @@ public:
 
 	std::vector<std::shared_ptr<Hero>> Characters;
 
-	//void Turn();
 	void AddCharacter(std::shared_ptr<Hero> Character);
 
 	~Scene() = default;
