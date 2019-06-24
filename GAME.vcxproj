@@ -173,6 +173,9 @@
     <Image Include="res\img\sorlosheet.png" />
     <Image Include="res\img\sprite_base_addon_2012_12_14.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Xml Include="res\Standart.xml" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

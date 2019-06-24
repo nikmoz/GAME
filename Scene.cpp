@@ -15,11 +15,13 @@ void Scene::AddCharacter(shared_ptr<Hero> Character)
 	Problem 3:Skill system allows for multiple target types and multiple turn actions, which leads to bigger problem than problem 1
 
 	Solution 1(checking...):
-	Create ChooseAction() that returns Action(Comman pattern), solves problem 2
+	Create LoadAction() that loads Action list for scene(probably move to global scene load later)
+	Create ChooseAction() that returns Action(Comman pattern), solves problem 2 (Done)
 	Execute Action, which lead to finding target and executing one of the functions in Hero, solves problems 1 and 3(?)
 };*/
 void Scene::Turn() 
 {
+	SetupActions("res/Standart.xml");
 	for (auto& Char:Characters)
 	{
 		std::cout << Char->Name << '\n';
@@ -69,8 +71,9 @@ Action* Scene::ChooseAction()//TODO(Nick):Read about Factory method
 		}
 	}
 };
-void Scene::SetupActions()//TODO(Nick): Change to load function
+void Scene::SetupActions(std::string ActionPath)//TODO(Nick): Change to load function
 {
+	DOMParser::StartParsing(ActionPath);
 	this->Actions.push_back(new NameAction);
 	this->Actions.push_back(new SideAction);
 }

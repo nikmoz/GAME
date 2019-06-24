@@ -8,14 +8,14 @@
 #include "ExeptionHandler.h"
 class DOMParser {
 private:
-	TagElement* Root = nullptr;
-	TagElement* CurrentElement = nullptr;
-	std::stack<std::string> Tags = {};
-	void FoundStart(const std::string& Tag);
-	void FoundEnd(const std::string& Tag);
-	void FoundContent(const std::string& Content);
+	static TagElement* Root;
+	static TagElement* CurrentElement;
+	static std::stack<std::string> Tags;
+	static void FoundStart(const std::string& Tag);
+	static void FoundEnd(const std::string& Tag);
+	static void FoundContent(const std::string& Content);
 	static std::string GetTagName(const std::string& Tag);
 public:
-	TagElement* StartParsing(std::string FileName);
+	static TagElement* StartParsing(std::string FileName);
 };
 

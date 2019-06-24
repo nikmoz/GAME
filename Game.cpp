@@ -19,6 +19,4 @@ void Game::InitScene()//NOTE(Nick):Future Load function
 	shared_ptr<Hero> AUther(new Hero("Arthas","res/img/sprite_base_addon_2012_12_14.png", sf::IntRect(10, 10, 70, 70), HeroeDefs::enemy));
 	Game::CurrentScene->AddCharacter(move(Uther));
 	Game::CurrentScene->AddCharacter(move(AUther));
-
-	Game::CurrentScene->SetupActions();//TODO(Nick):Get rid of this, and create normal load function
 };

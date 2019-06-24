@@ -1,5 +1,6 @@
 #pragma once
 #include "Hero.h"
+#include "DOMParser.h"
 #include "Action.h"
 #include <vector>
 #include <thread>
@@ -12,10 +13,11 @@ public:
 	void Turn();
 
 	void AddCharacter(std::shared_ptr<Hero> Character);
-	void SetupActions();
+	
 
 	~Scene() = default;
 private:
+	void SetupActions(std::string ActionPath);
 	std::vector<class Action*> Actions;
 	class Action* ChooseAction();
 };
