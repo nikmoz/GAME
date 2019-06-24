@@ -1,8 +1,12 @@
 #include "Scene.h"
+
+#include "NameAction.h"
+#include "SideAction.h"
 using std::move;
 using std::shared_ptr;
 
-void Scene::AddCharacter(shared_ptr<Hero> Character) {
+void Scene::AddCharacter(shared_ptr<Hero> Character)
+{
 	this->Characters.push_back(Character);
 };
 /*THEME(Nick):Turn() {
@@ -12,6 +16,61 @@ void Scene::AddCharacter(shared_ptr<Hero> Character) {
 
 	Solution 1(checking...):
 	Create ChooseAction() that returns Action(Comman pattern), solves problem 2
-	Create ChooseTarget() that calls action passing target and actor, solves problem 1(?)
-	Execute Action, which lead to executing one of the functions in Hero, solves problem 3(?)
+	Execute Action, which lead to finding target and executing one of the functions in Hero, solves problems 1 and 3(?)
 };*/
+void Scene::Turn() 
+{
+	for (auto& Char:Characters)
+	{
+		std::cout << Char->Name << '\n';
+		Action* TurnAction = ChooseAction();
+		TurnAction->execute(*Char);
+	}
+}
+Action* Scene::ChooseAction()//TODO(Nick):Read about Factory method
+{
+	auto i(0);
+	static bool KeyPressed = false;
+	while (true)
+	{
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+		{
+			if (!KeyPressed)
+			{
+				KeyPressed = true;
+				if (i < Actions.size() - 1)
+				{
+					i++;
+				}
+			}
+		}
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+		{
+			if (!KeyPressed)
+			{
+				KeyPressed = true;
+				if (i > 0)
+				{
+					i--;
+				}
+			}
+		}
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
+		{
+			if (!KeyPressed)
+			{
+				KeyPressed = true;
+				return Actions.at(i);
+			}
+		}
+		else
+		{
+			KeyPressed = false;
+		}
+	}
+};
+void Scene::SetupActions()//TODO(Nick): Change to load function
+{
+	this->Actions.push_back(new NameAction);
+	this->Actions.push_back(new SideAction);
+}

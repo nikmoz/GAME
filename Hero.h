@@ -11,14 +11,13 @@ class Hero
 {
 public:
 
-	Hero(std::string TexturePath, sf::IntRect StartRect,HeroeDefs::Side Side);
+	Hero(std::string Name,std::string TexturePath, sf::IntRect StartRect,HeroeDefs::Side Side);
 	
+	std::string Name;
 	HeroeDefs::Side Side;
-	void TakeTurn();
 
 	std::unique_ptr<GraphicHero> Graphic;
 
 	~Hero() = default;
-private:
 };
 

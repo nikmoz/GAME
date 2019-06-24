@@ -8,7 +8,7 @@ class Game
 public:
 	static void StartGame();
 	static void InitScene();
-	static std::unique_ptr<Scene> CurrentScene;
+	static std::unique_ptr<class Scene> CurrentScene;
 	static int WindowWidth;
 	static int WindowHeight;
 };
