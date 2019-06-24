@@ -1,7 +1,8 @@
 #pragma once
-#include <SFML/Graphics.hpp>
-#include <string>
 
+#include <string>
+#include "GraphicHero.h"
+#include <memory>
 namespace HeroeDefs {
 	enum Side{hero,enemy};
 };
@@ -15,9 +16,9 @@ public:
 	HeroeDefs::Side Side;
 	void TakeTurn();
 
-	sf::Sprite Sprite;//TODO: Think how to put it aside from gameplay part
+	std::unique_ptr<GraphicHero> Graphic;
+
 	~Hero() = default;
 private:
-	sf::Texture Texture;//TODO: Think how to put it aside from gameplay part
 };
 

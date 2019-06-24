@@ -1,11 +1,15 @@
 #pragma once
-#include <vector>
+#include "Scene.h"
+#include "Render.h"
 #include <memory>
-#include "Hero.h"
+#include <thread>
 class Game
 {
 public:
-	static std::vector<std::shared_ptr<Hero>> Characters;
-	static void AddCharacter(std::shared_ptr<Hero> Character);
+	static void StartGame();
+	static void InitScene();
+	static std::unique_ptr<Scene> CurrentScene;
+	static int WindowWidth;
+	static int WindowHeight;
 };
 
