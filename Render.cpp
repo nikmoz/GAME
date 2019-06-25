@@ -1,10 +1,9 @@
 #include "Render.h"
 
 void Render::RenderScene() {
-	sf::RenderWindow WindowScene(sf::VideoMode(Game::WindowWidth,Game::WindowHeight), "Test");
-	SetupCharacters();
+	static sf::RenderWindow WindowScene(sf::VideoMode(Game::WindowWidth,Game::WindowHeight), "Test");
 
-	while (WindowScene.isOpen())
+	if (WindowScene.isOpen())
 	{
 		sf::Event event;
 		while (WindowScene.pollEvent(event))

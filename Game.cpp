@@ -6,11 +6,13 @@ unique_ptr<Scene> Game::CurrentScene = nullptr;
 
 void Game::StartGame() 
 {
-	std::thread GUI(Render::RenderScene);//NOTE(Nick):Check thread and non-thread GUI
-
-	Game::CurrentScene->Turn();
-
-	GUI.join();//NOTE(Nick): Probably move this to another function
+	Render::SetupCharacters();
+	Game::CurrentScene->SetupActions("res/Standart.xml");
+	while (true)
+	{
+		Render::RenderScene();
+		Game::CurrentScene->Turn();
+	}
 };
 void Game::InitScene()//NOTE(Nick):Future Load function
 {
