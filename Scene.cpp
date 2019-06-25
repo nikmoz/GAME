@@ -1,7 +1,5 @@
 #include "Scene.h"
 
-#include "NameAction.h"
-#include "SideAction.h"
 using std::move;
 using std::shared_ptr;
 
@@ -19,17 +17,6 @@ void Scene::AddCharacter(shared_ptr<Hero> Character)
 	Create ChooseAction() that returns Action(Comman pattern), solves problem 2 (Done)
 	Execute Action, which leadû to finding target and executing one of the functions in Hero, solves problems 1 and 3(?)
 */
-void Scene::Turn() 
-{
-	Action* TurnAction = ChooseAction();
-	if (TurnAction == nullptr) return;
-	TurnAction->execute(*Characters.at(currentChar));
-	currentChar++;
-	if (currentChar>=Characters.size())
-	{
-		currentChar = 0;
-	}
-}
 /*THEME(Nick):ChooseAction()
 	Root 1: In current state scene should know about all actions for each actor
 		Branch 1: Loading actions
@@ -62,50 +49,46 @@ void Scene::Turn()
 		Solution 2:
 			Create static InputHandler class that sends action to each sub. Make Scene and Render subs.
 */
-Action* Scene::ChooseAction()//TODO(Nick):Read about Factory method
+
+Action* Scene::ChooseAction(Keyboard::Keys Key)//TODO(Nick):Read about Factory method
 {
 	static auto i(0);
-	static bool KeyPressed = false;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+	if (Key==Keyboard::Down)
 	{
-		if (!KeyPressed)
+		if (i < Actions.size() - 1)
 		{
-			KeyPressed = true;
-			if (i < Actions.size() - 1)
-			{
-				i++;
-			}
+			i++;
 		}
 		return nullptr;
 	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+	if (Key == Keyboard::Up)
 	{
-		if (!KeyPressed)
+		if (i > 0)
 		{
-			KeyPressed = true;
-			if (i > 0)
-			{
-				i--;
-			}
+			i--;
 		}
 		return nullptr;
 	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
+	if (Key == Keyboard::Enter)
 	{
-		if (!KeyPressed)
-		{
-			KeyPressed = true;
 			auto tmp = i;
 			i = 0;
 			return Actions.at(tmp);
-		}
-	}
-	else
-	{
-		KeyPressed = false;
-		return nullptr;
 	}
 	return nullptr;
+};
+void Scene::update(Keyboard::Keys Key)
+{
+	Action* TurnAction = ChooseAction(Key);
+	if (TurnAction == nullptr) { 
+		return;
+	}
+	TurnAction->execute(*Characters.at(currentChar));
+	currentChar++;
+	if (currentChar >= Characters.size())
+	{
+		currentChar = 0;
+	}
 };
 void Scene::SetupActions(std::string ActionPath)//TODO(Nick): Change to load function
 {

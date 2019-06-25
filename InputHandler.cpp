@@ -1,7 +1,9 @@
 #include "InputHandler.h"
+
+
 void InputHandler::notify(Keyboard::Keys Key) {
-	for (auto& Sub : Subs) {
-		Sub.update(Key);
+	for (auto& Sub :Subs) {
+		Sub->update(Key);
 	}
 }
 void InputHandler::HandleInput() {
