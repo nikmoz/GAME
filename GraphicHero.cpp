@@ -12,7 +12,6 @@ GraphicHero::GraphicHero(std::string TexturePath, sf::IntRect StartRect)
 {
 	Problem 1: How to iterate through spritesheet? Different sprites have different sizes, and space bettwen two in one spritesheet is different. 
 	Problem 2: Different animation duration.
-	Problem 3: Where to store this info?
 	Solution 1:
 	Google this
 }

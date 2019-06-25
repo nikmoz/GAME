@@ -17,7 +17,7 @@ void Scene::AddCharacter(shared_ptr<Hero> Character)
 	Solution 1(checking...):
 	Create LoadAction() that loads Action list for scene(probably move to global scene load later)
 	Create ChooseAction() that returns Action(Comman pattern), solves problem 2 (Done)
-	Execute Action, which lead to finding target and executing one of the functions in Hero, solves problems 1 and 3(?)
+	Execute Action, which leadû to finding target and executing one of the functions in Hero, solves problems 1 and 3(?)
 };*/
 void Scene::Turn() 
 {
