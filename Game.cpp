@@ -1,17 +1,21 @@
 #include "Game.h"
 
-using namespace std;
+using std::shared_ptr;
 int Game::WindowHeight = 400;
 int Game::WindowWidth = 400;
-unique_ptr<Scene> Game::CurrentScene = nullptr;
+shared_ptr<Scene> Game::CurrentScene = nullptr;
 
 void Game::StartGame() 
 {
 	Render::SetupCharacters();
-	Game::CurrentScene->SetupActions("res/Standart.xml");
+
+	InputHandler::Subscribe(Game::CurrentScene);
+
+	Game::CurrentScene->SetupActions("res/Standart.xml");//TODO(Nick):Move to normal Load
+
 	while (true)
 	{
-		//InputHandler::HandleInput();
+		InputHandler::HandleInput();
 		Render::RenderScene();
 	}
 };
