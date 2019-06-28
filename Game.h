@@ -1,4 +1,5 @@
 #pragma once
+#include "InputHandler.h"
 #include "Scene.h"
 #include "Render.h"
 #include <memory>
@@ -8,7 +9,7 @@ class Game
 public:
 	static void StartGame();
 	static void InitScene();
-	static std::unique_ptr<class Scene> CurrentScene;
+	static std::shared_ptr<Scene> CurrentScene;
 	static int WindowWidth;
 	static int WindowHeight;
 };

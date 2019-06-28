@@ -3,7 +3,7 @@
 class NameAction :public Action
 {
 public:
-	void execute(Hero& actor) override;
 	~NameAction()=default;
+	void execute(Hero& actor) override;
 };
 
