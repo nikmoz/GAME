@@ -1,6 +1,4 @@
-
 #include "InputHandler.h"
-std::vector<Subscriber> InputHandler::Subs = {};
 
 void InputHandler::notify(Keyboard::Keys Key) {
 	for (auto& Sub :Subs) {

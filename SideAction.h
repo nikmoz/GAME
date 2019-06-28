@@ -1,5 +1,6 @@
 #pragma once
 #include "Action.h"
+
 class SideAction :public Action
 {
 public:

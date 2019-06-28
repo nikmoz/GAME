@@ -3,14 +3,15 @@
 #include <vector>
 #include <memory>
 #include <SFML/Window.hpp>
-using Subscriber=std::shared_ptr<Observer>;
+using Subscriber=std::shared_ptr<class Observer>;
+
 class InputHandler
 {
 public:
-	static void Subscribe(Subscriber Sub);
-	static void HandleInput();
+	void Subscribe(Subscriber Sub);
+	void HandleInput();
 private:
-	static void notify(Keyboard::Keys Key);
-	static std::vector<Subscriber> Subs;
+	void notify(Keyboard::Keys Key);
+	std::vector<Subscriber> Subs;
 };
 

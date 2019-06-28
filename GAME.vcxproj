@@ -159,6 +159,7 @@
     <ClCompile Include="NameAction.cpp" />
     <ClCompile Include="SideAction.cpp" />
     <ClCompile Include="TagElement.cpp" />
+    <ClCompile Include="TargetAction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".clang-tidy" />
@@ -178,6 +179,7 @@
     <ClInclude Include="NameAction.h" />
     <ClInclude Include="SideAction.h" />
     <ClInclude Include="TagElement.h" />
+    <ClInclude Include="TargetAction.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\img\sorlosheet.png" />
