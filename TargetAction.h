@@ -9,14 +9,18 @@ using HeroPtr = std::shared_ptr<Hero>;
 class TargetAction :public Action, public Observer
 {
 public:
-	~TargetAction() = default;
 
-	void InitTargetAction(Hero& actor);
-	
+	~TargetAction()=default;
+
 	void execute(Hero& actor) override;
-	void update(Keyboard::Keys Key) override;
+	virtual void update(Keyboard::Keys Key) override;
 private:
+
+	virtual void InitTargetAction(Hero& actor);
+	virtual int ChooseTarget(Keyboard::Keys Key);
+
 	std::vector<HeroPtr> PossibleTargets;
-	std::unique_ptr<InputHandler> TargetInputHandler;
+
+	std::unique_ptr<InputHandler> TargetInputHandler= std::make_unique<InputHandler>();
 };
 

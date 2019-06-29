@@ -16,9 +16,31 @@ void Game::StartGame()
 	{
 		Render::RenderScene();
 
-		TurnInputHandler->HandleInput();
+		if (Game::CheckActionQueue())
+		{
+			TurnInputHandler->HandleInput();
+		}
 		
 	}
+};
+bool Game::CheckActionQueue()//NOTE(Nick): Cause some actions may have countdown, i probably should switch to vector instead of queue
+{
+	if (Game::CurrentScene->ActionQueue.size() == 0)
+	{
+		return true;
+	}
+
+	ActionPtr CurrentAction = Game::CurrentScene->ActionQueue.front().first;
+	HeroPtr CurrentHero = Game::CurrentScene->ActionQueue.front().second;
+
+	CurrentAction->execute(*CurrentHero);
+
+	if (CurrentAction->IsResolved)
+	{
+		Game::CurrentScene->ActionQueue.pop();
+	}
+
+	return false;
 };
 void Game::InitScene()//NOTE(Nick):Future Load function
 {
@@ -28,7 +50,7 @@ void Game::InitScene()//NOTE(Nick):Future Load function
 
 	TurnInputHandler->Subscribe(Game::CurrentScene);
 
-	Game::CurrentScene->SetupActions("res/Standart.xml");//TODO(Nick):Move to normal Load
+	Game::CurrentScene->SetupActions();//TODO(Nick):Move to normal Load
 
 	Game::CurrentScene->AddCharacter(move(Uther));
 	Game::CurrentScene->AddCharacter(move(AUther));

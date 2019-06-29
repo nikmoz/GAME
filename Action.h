@@ -6,7 +6,10 @@
 class Action
 {
 public:
+	
 	~Action()=default;
+
+	bool IsResolved = false;
 	virtual void execute(Hero& actor)=0;
 };
 

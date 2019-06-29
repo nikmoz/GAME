@@ -20,6 +20,22 @@ void InputHandler::HandleInput() {
 			InputHandler::notify(Keyboard::Down);
 		}
 	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+	{
+		if (!KeyPressed)
+		{
+			KeyPressed = true;
+			InputHandler::notify(Keyboard::Down);
+		}
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+	{
+		if (!KeyPressed)
+		{
+			KeyPressed = true;
+			InputHandler::notify(Keyboard::Down);
+		}
+	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
 		if (!KeyPressed)

@@ -13,6 +13,7 @@ public:
 	static int WindowWidth;
 	static int WindowHeight;
 private:
+	static bool CheckActionQueue();
 	static std::unique_ptr<class InputHandler> TurnInputHandler;
 };
 

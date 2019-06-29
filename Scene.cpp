@@ -2,6 +2,7 @@
 
 #include "NameAction.h"
 #include "SideAction.h"
+#include "TargetAction.h"
 
 using std::move;
 
@@ -73,7 +74,7 @@ void Scene::AddCharacter(HeroPtr Character)
 			Create static InputHandler class that sends action to each sub. Make Scene and Render subs.
 */
 
-Action* Scene::ChooseAction(Keyboard::Keys Key)//TODO(Nick):Read about Factory method
+ActionPtr Scene::ChooseAction(Keyboard::Keys Key)//TODO(Nick):Read about Factory method
 {
 	static auto i(0);
 
@@ -82,6 +83,8 @@ Action* Scene::ChooseAction(Keyboard::Keys Key)//TODO(Nick):Read about Factory m
 		if (i < Actions.size() - 1)
 		{
 			i++;
+
+			std::cout << "Current Action:" << i<< std::endl;
 		}
 		return nullptr;
 	}
@@ -91,6 +94,8 @@ Action* Scene::ChooseAction(Keyboard::Keys Key)//TODO(Nick):Read about Factory m
 		if (i > 0)
 		{
 			i--;
+
+			std::cout << "Current Action:" << i << std::endl;
 		}
 		return nullptr;
 	}
@@ -99,6 +104,7 @@ Action* Scene::ChooseAction(Keyboard::Keys Key)//TODO(Nick):Read about Factory m
 	{
 			auto tmp = i;
 			i = 0;
+
 			return Actions.at(tmp);
 	}
 
@@ -107,13 +113,20 @@ Action* Scene::ChooseAction(Keyboard::Keys Key)//TODO(Nick):Read about Factory m
 
 void Scene::update(Keyboard::Keys Key)
 {
-	Action* TurnAction = ChooseAction(Key);
+	ActionPtr TurnAction = ChooseAction(Key);
 
 	if (TurnAction == nullptr) { 
 		return;
 	}
 
+	std::cout <<"Current Char:"<< Characters.at(currentChar)->Name << std::endl;
+
 	TurnAction->execute(*Characters.at(currentChar));
+	if (!TurnAction->IsResolved)
+	{
+		HeroPtr Char = Characters.at(currentChar);
+		ActionQueue.push(std::make_pair(TurnAction, Char));
+	}
 
 	currentChar++;
 	if (currentChar >= Characters.size())
@@ -121,9 +134,9 @@ void Scene::update(Keyboard::Keys Key)
 		currentChar = 0;
 	}
 };
-
-void Scene::SetupActions(std::string ActionPath)//TODO(Nick): Change to load function
+void Scene::SetupActions()//TODO(Nick): Change to load function
 {
-	this->Actions.push_back(new NameAction);
-	this->Actions.push_back(new SideAction);
+	this->Actions.push_back(ActionPtr(new NameAction));
+	this->Actions.push_back(ActionPtr(new SideAction));
+	this->Actions.push_back(ActionPtr(new TargetAction));
 }
