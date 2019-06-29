@@ -10,8 +10,8 @@ class InputHandler
 public:
 	void Subscribe(Subscriber Sub);
 	void HandleInput();
+	std::vector<Subscriber> Subs;
 private:
 	void notify(Keyboard::Keys Key);
-	std::vector<Subscriber> Subs;
 };
 

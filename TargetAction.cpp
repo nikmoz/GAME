@@ -2,15 +2,16 @@
 
 void TargetAction::InitTargetAction(Hero& actor)
 {
-	if (PossibleTargets.size() == 0) {
-		for (auto& Char : Game::CurrentScene->Characters)
-		{
-			if (Char->Side != actor.Side)
-			{
-				PossibleTargets.push_back(Char);
-			}
-		}
+	PossibleTargets = {};
 
+	for (auto& Char : Game::CurrentScene->Characters)
+	{
+		if (Char->Side != actor.Side)
+		{
+			PossibleTargets.push_back(Char);
+		}
+	}
+	if (TargetInputHandler->Subs.size() == 0) {
 		TargetInputHandler->Subscribe(std::shared_ptr<class Observer>(this));
 	}
 };
@@ -41,15 +42,16 @@ int TargetAction::ChooseTarget(Keyboard::Keys Key)
 	{
 		auto tmp = i;
 		i = 0;
-		return i;
+		return tmp;
 	}
 	return -1;
 };
 
 void TargetAction::execute(Hero& actor)
 {
-	InitTargetAction(actor);
+	IsResolved = false;
 
+	InitTargetAction(actor);
 	TargetInputHandler->HandleInput();
 }
 

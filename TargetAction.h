@@ -19,7 +19,7 @@ private:
 	virtual void InitTargetAction(Hero& actor);
 	virtual int ChooseTarget(Keyboard::Keys Key);
 
-	std::vector<HeroPtr> PossibleTargets;
+	std::vector<HeroPtr> PossibleTargets = {};
 
 	std::unique_ptr<InputHandler> TargetInputHandler= std::make_unique<InputHandler>();
 };
