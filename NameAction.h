@@ -1,11 +1,10 @@
 #pragma once
 #include "Action.h"
+#include <iostream>
 
-class NameAction :public Action
+class NameAction final : public Action
 {
 public:
-	~NameAction()=default;
-	void execute(Hero& actor) override;
-
+	~NameAction() = default;
+	void Execute(Hero& Actor) override;
 };
-

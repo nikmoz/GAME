@@ -5,5 +5,6 @@ namespace Keyboard {
 class Observer
 {
 public:
-	virtual void update(Keyboard::Keys Key)=0;
+	virtual ~Observer()=default;
+	virtual void Update(Keyboard::Keys Key)=0;
 };

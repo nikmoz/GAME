@@ -1,15 +1,17 @@
 #pragma once
-#include "Game.h"
+
 #include "Hero.h"
-#include <iostream>
+
 
 class Action
 {
 public:
-	
-	~Action()=default;
+
+	Action() = default;
+	Action(Action&) = default;
+
+	virtual ~Action() = default;
 
 	bool IsResolved = false;
-	virtual void execute(Hero& actor)=0;
+	virtual void Execute(Hero& Actor) =0;
 };
-

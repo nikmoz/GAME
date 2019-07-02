@@ -1,26 +1,27 @@
 #pragma once
 #include "Action.h"
+#include "Game.h"
 #include "InputHandler.h"
 #include "Observer.h"
 #include <vector>
+#include <iostream>
 
-using HeroPtr = std::shared_ptr<Hero>;
+using TargetPtr = std::shared_ptr<Hero>;
 
-class TargetAction :public Action, public Observer
+class TargetAction : public Action, public Observer
 {
 public:
 
-	~TargetAction()=default;
+	~TargetAction() = default;
 
-	void execute(Hero& actor) override;
-	virtual void update(Keyboard::Keys Key) override;
+	void Execute(Hero& Actor) override;
+	void Update(Keyboard::Keys Key) override;
 private:
 
-	virtual void InitTargetAction(Hero& actor);
+	virtual void InitTargetAction(Hero& Actor);
 	virtual int ChooseTarget(Keyboard::Keys Key);
 
-	std::vector<HeroPtr> PossibleTargets = {};
+	std::vector<TargetPtr> PossibleTargets_ = {};
 
-	std::unique_ptr<InputHandler> TargetInputHandler= std::make_unique<InputHandler>();
+	std::unique_ptr<InputHandler> TargetInputHandler_ = std::make_unique<InputHandler>();
 };
-

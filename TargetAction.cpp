@@ -1,69 +1,69 @@
 #include "TargetAction.h"
 
-void TargetAction::InitTargetAction(Hero& actor)
+void TargetAction::InitTargetAction(Hero& Actor)
 {
-	PossibleTargets = {};
+	PossibleTargets_ = {};
 
 	for (auto& Char : Game::CurrentScene->Characters)
 	{
-		if (Char->Side != actor.Side)
+		if (Char->Side != Actor.Side)
 		{
-			PossibleTargets.push_back(Char);
+			PossibleTargets_.push_back(Char);
 		}
 	}
-	if (TargetInputHandler->Subs.size() == 0) {
-		TargetInputHandler->Subscribe(std::shared_ptr<class Observer>(this));
+	if (TargetInputHandler_->Subs.empty()) {
+		TargetInputHandler_->Subscribe(std::shared_ptr<class Observer>(this));
 	}
 };
 
-int TargetAction::ChooseTarget(Keyboard::Keys Key)
+int TargetAction::ChooseTarget(const Keyboard::Keys Key)
 {
-	static auto i(0);
+	static auto I(0U);
 
 	if (Key == Keyboard::Left)
 	{
-		if (i > 0)
+		if (I > 0)
 		{
-			i++;
+			I++;
 		}
 		return -1;
 	}
 
 	if (Key == Keyboard::Right)
 	{
-		if (i < PossibleTargets.size() - 1)
+		if (I < PossibleTargets_.size() - 1)
 		{
-			i--;
+			I--;
 		}
 		return -1;
 	}
 
 	if (Key == Keyboard::Enter)
 	{
-		auto tmp = i;
-		i = 0;
-		return tmp;
+		const auto Tmp = I;
+		I = 0;
+		return Tmp;
 	}
 	return -1;
 };
 
-void TargetAction::execute(Hero& actor)
+void TargetAction::Execute(Hero& Actor)
 {
 	IsResolved = false;
 
-	InitTargetAction(actor);
-	TargetInputHandler->HandleInput();
+	InitTargetAction(Actor);
+	TargetInputHandler_->HandleInput();
 }
 
-void TargetAction::update(Keyboard::Keys Key)
+void TargetAction::Update(const Keyboard::Keys Key)
 {
-	int TargetIndex = ChooseTarget(Key);
+	const auto TargetIndex = ChooseTarget(Key);
 
 	if (TargetIndex == -1) {
 		return;
 	}
 	
-	std::cout << "Target Name:" << PossibleTargets.at(TargetIndex)->Name << std::endl;
+	std::cout << "Target Name:" << PossibleTargets_.at(TargetIndex)->Name << std::endl;
 	
 	IsResolved = true;
 }

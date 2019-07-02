@@ -7,13 +7,14 @@
 
 class Action;
 
-using HeroPtr = std::shared_ptr<Hero>;
+using TargetPtr = std::shared_ptr<Hero>;
 using ActionPtr=std::shared_ptr<Action>;
 
 class Scene
 {
 public:
-	std::vector<HeroPtr> Characters;
+	virtual ~Scene()=default;
+	std::vector<TargetPtr> Characters;
 
 	virtual void UpdateScene()=0;
 	virtual void Redraw()=0;//NOTE(Nick):Figure out if I still need Redraw in MVS approach
@@ -21,8 +22,8 @@ public:
 	virtual void Unload()=0;
 
 protected:
-	std::unique_ptr<Render> Render;
+	std::unique_ptr<Render> Render_;
 
-	std::queue<std::pair<ActionPtr, HeroPtr>> ActionQueue;
+	std::queue<std::pair<ActionPtr, TargetPtr>> ActionQueue_;
 };
 

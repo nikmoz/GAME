@@ -1,15 +1,18 @@
 #include "Render.h"
-Render::Render(int RenderWidth, int RendeHeight) :RendeHeight(RendeHeight), RenderWidth(RenderWidth) {};
+Render::Render(const int RenderWidth, const int RenderHeight) :RenderWidth(RenderWidth), RenderHeight(RenderHeight)
+{
+	Characters = {};
+};
 
 void Render::RenderScene() {
-	static sf::RenderWindow WindowScene(sf::VideoMode(RenderWidth, RendeHeight), "Test");
+	static sf::RenderWindow WindowScene(sf::VideoMode(RenderWidth, RenderHeight), "Test");
 
 	if (WindowScene.isOpen())
 	{
-		sf::Event event;
-		while (WindowScene.pollEvent(event))
+		sf::Event Event{};
+		while (WindowScene.pollEvent(Event))
 		{
-			if (event.type == sf::Event::Closed)
+			if (Event.type == sf::Event::Closed)
 			{
 				WindowScene.close();
 			}
@@ -22,7 +25,7 @@ void Render::RenderScene() {
 		WindowScene.display();
 	}
 };
-void Render::AddCharacter(GraphicHeroPtr Character) 
+void Render::AddCharacter(const GraphicHeroPtr& Character) noexcept
 {
 	Characters.push_back(Character);
 };

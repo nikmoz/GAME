@@ -16,6 +16,6 @@ private:
 	static void FoundContent(const std::string& Content);
 	static std::string GetTagName(const std::string& Tag);
 public:
-	static TagElement* StartParsing(std::string FileName);
+	static TagElement* StartParsing(const std::string& FileName);
 };
 

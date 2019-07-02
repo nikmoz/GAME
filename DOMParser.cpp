@@ -2,7 +2,7 @@
 TagElement* DOMParser::Root = nullptr;
 TagElement* DOMParser::CurrentElement = nullptr;
 std::stack<std::string> DOMParser::Tags = {};
-TagElement* DOMParser::StartParsing(std::string FileName) {
+TagElement* DOMParser::StartParsing(const std::string& FileName) {
 	std::string TmpS;
 	std::smatch matches;
 	std::regex StartTag("<[a-zA-z]+>");

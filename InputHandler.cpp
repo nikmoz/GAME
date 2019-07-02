@@ -1,23 +1,23 @@
 #include "InputHandler.h"
 
-void InputHandler::notify(Keyboard::Keys Key) {
+void InputHandler::Notify(const Keyboard::Keys Key) {
 	for (auto& Sub :Subs) {
-		Sub->update(Key);
+		Sub->Update(Key);
 	}
 }
 
-void InputHandler::Subscribe(Subscriber Sub) {
+void InputHandler::Subscribe(const Subscriber& Sub) {
 	Subs.push_back(Sub);
 }
 
 void InputHandler::HandleInput() {
-	static bool KeyPressed = false;
+	static auto KeyPressed = false;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 	{
 		if (!KeyPressed)
 		{
 			KeyPressed = true;
-			InputHandler::notify(Keyboard::Down);
+			InputHandler::Notify(Keyboard::Down);
 		}
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
@@ -25,7 +25,7 @@ void InputHandler::HandleInput() {
 		if (!KeyPressed)
 		{
 			KeyPressed = true;
-			InputHandler::notify(Keyboard::Left);
+			InputHandler::Notify(Keyboard::Left);
 		}
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
@@ -33,7 +33,7 @@ void InputHandler::HandleInput() {
 		if (!KeyPressed)
 		{
 			KeyPressed = true;
-			InputHandler::notify(Keyboard::Right);
+			InputHandler::Notify(Keyboard::Right);
 		}
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
@@ -41,7 +41,7 @@ void InputHandler::HandleInput() {
 		if (!KeyPressed)
 		{
 			KeyPressed = true;
-			InputHandler::notify(Keyboard::Up);
+			InputHandler::Notify(Keyboard::Up);
 		}
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
@@ -49,7 +49,7 @@ void InputHandler::HandleInput() {
 		if (!KeyPressed)
 		{
 			KeyPressed = true;
-			InputHandler::notify(Keyboard::Enter);
+			InputHandler::Notify(Keyboard::Enter);
 		}
 	}
 	else

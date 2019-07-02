@@ -1,6 +1,8 @@
 #include "NameAction.h"
 
-void NameAction::execute(Hero& actor) {
-	std::cout << actor.Name << std::endl;
+void NameAction::Execute(Hero& Actor) {
+
+	std::cout << Actor.Name << std::endl;
 	IsResolved = true;
+
 }

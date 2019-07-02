@@ -9,10 +9,10 @@ using Subscriber=std::shared_ptr<class Observer>;
 class InputHandler
 {
 public:
-	void Subscribe(Subscriber Sub);
+	void Subscribe(const Subscriber& Sub);
 	void HandleInput();
 	std::vector<Subscriber> Subs;
 private:
-	void notify(Keyboard::Keys Key);
+	void Notify(Keyboard::Keys Key);
 };
 

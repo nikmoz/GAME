@@ -1,10 +1,10 @@
 #include "SideAction.h"
-void SideAction::execute(Hero& actor) {
-	if (actor.Side == HeroeDefs::hero)
+void SideAction::Execute(Hero& Actor) {
+	if (Actor.Side == HeroDefinitions::Hero)
 	{
 		std::cout << "Hero" << std::endl;
 	}
-	else if (actor.Side == HeroeDefs::enemy)
+	else if (Actor.Side == HeroDefinitions::Enemy)
 	{
 		std::cout << "Enemy" << std::endl;
 	}
