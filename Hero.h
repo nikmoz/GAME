@@ -1,23 +1,23 @@
 #pragma once
-#include <SFML/Graphics.hpp>
-#include <string>
 
-namespace HeroeDefs {
-	enum Side{hero,enemy};
+#include <string>
+#include "GraphicHero.h"
+#include <memory>
+namespace HeroDefinitions {
+	enum Side{Hero,Enemy};
 };
 
 class Hero
 {
 public:
 
-	Hero(std::string TexturePath, sf::IntRect StartRect,HeroeDefs::Side Side);
+	Hero(std::string Name, const std::string& TexturePath, sf::IntRect StartRect,HeroDefinitions::Side Side);
 	
-	HeroeDefs::Side Side;
-	void TakeTurn();
+	std::string Name;
+	HeroDefinitions::Side Side;
 
-	sf::Sprite Sprite;
+	std::shared_ptr<class GraphicHero> Graphic;
+
 	~Hero() = default;
-private:
-	sf::Texture Texture;
 };
 

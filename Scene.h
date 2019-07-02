@@ -1,28 +1,29 @@
 #pragma once
 #include "Hero.h"
-#include "WindowScene.h"
+#include "Render.h"
+#include "Action.h"
 #include <vector>
-#include <thread>
+#include <queue>
+
+class Action;
+
+using TargetPtr = std::shared_ptr<Hero>;
+using ActionPtr=std::shared_ptr<Action>;
+
 class Scene
 {
 public:
-	Scene(int SceneWidth, int SceneHeight);
+	virtual ~Scene()=default;
+	std::vector<TargetPtr> Characters;
 
+	virtual void UpdateScene()=0;
+	virtual void Redraw()=0;//NOTE(Nick):Figure out if I still need Redraw in MVS approach
+	virtual void Load()=0;
+	virtual void Unload()=0;
 
+protected:
+	std::unique_ptr<Render> Render_;
 
-	std::vector<std::shared_ptr<Hero>> Characters;
-	//std::unique_ptr<sf::RenderWindow> WindowScene;
-
-	void AddCharacter(std::shared_ptr<Hero> Character);
-	void SetupCharacter();
-	void RenderScene();
-	void Turn();
-
-	~Scene() = default;
-private:
-	int SceneWidth = 0;
-	int SceneHeight = 0;
+	std::queue<std::pair<ActionPtr, TargetPtr>> ActionQueue_;
 };
-
-
 

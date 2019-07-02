@@ -1,18 +1,13 @@
 #include "Hero.h"
 
 
-
-Hero::Hero(std::string TexturePath, sf::IntRect StartRect, HeroeDefs::Side Side):Side(std::move(Side))
+Hero::Hero(std::string Name, const std::string& TexturePath, sf::IntRect StartRect, const HeroDefinitions::Side Side)
+	:Name(std::move(Name)), Side(Side)
 {
 	//Graphic init
-	this->Texture.loadFromFile(TexturePath);
-	this->Sprite.setTexture(this->Texture);
-	this->Sprite.setTextureRect(StartRect);
+	Graphic = std::make_unique<GraphicHero>(TexturePath, StartRect);
 	//Game init
-
 }
-void Hero::TakeTurn() {
 
-}
 
 
