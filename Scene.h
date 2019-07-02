@@ -1,9 +1,8 @@
 #pragma once
 #include "Hero.h"
-#include "Observer.h"
+#include "Render.h"
 #include "Action.h"
 #include <vector>
-#include <thread>
 #include <queue>
 
 class Action;
@@ -11,31 +10,19 @@ class Action;
 using HeroPtr = std::shared_ptr<Hero>;
 using ActionPtr=std::shared_ptr<Action>;
 
-
-
-class Scene:public Observer
+class Scene
 {
 public:
-	
-	Scene()=default;
-
-	std::queue<std::pair<ActionPtr,HeroPtr>> ActionQueue;
 	std::vector<HeroPtr> Characters;
 
-	void SetupActions();
-	void AddCharacter(HeroPtr Character);
-	void update(Keyboard::Keys Key)override;
+	virtual void UpdateScene()=0;
+	virtual void Redraw()=0;//NOTE(Nick):Figure out if I still need Redraw in MVS approach
+	virtual void Load()=0;
+	virtual void Unload()=0;
 
-	~Scene() = default;
-private:
-	
-	int currentChar = 0;
+protected:
+	std::unique_ptr<Render> Render;
 
-	
-	std::vector<ActionPtr> Actions;
-
-	ActionPtr ChooseAction(Keyboard::Keys Key);
+	std::queue<std::pair<ActionPtr, HeroPtr>> ActionQueue;
 };
-
-
 

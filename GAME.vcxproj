@@ -155,8 +155,9 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Observer.cpp" />
     <ClCompile Include="Render.cpp" />
-    <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="BattleScene.cpp" />
     <ClCompile Include="NameAction.cpp" />
+    <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SideAction.cpp" />
     <ClCompile Include="TagElement.cpp" />
     <ClCompile Include="TargetAction.cpp" />
@@ -175,8 +176,9 @@
     <ClInclude Include="InputHandler.h" />
     <ClInclude Include="Observer.h" />
     <ClInclude Include="Render.h" />
-    <ClInclude Include="Scene.h" />
+    <ClInclude Include="BattleScene.h" />
     <ClInclude Include="NameAction.h" />
+    <ClInclude Include="Scene.h" />
     <ClInclude Include="SideAction.h" />
     <ClInclude Include="TagElement.h" />
     <ClInclude Include="TargetAction.h" />

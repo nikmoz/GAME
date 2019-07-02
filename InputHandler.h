@@ -3,6 +3,7 @@
 #include <vector>
 #include <memory>
 #include <SFML/Window.hpp>
+
 using Subscriber=std::shared_ptr<class Observer>;
 
 class InputHandler

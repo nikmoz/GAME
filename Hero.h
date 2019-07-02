@@ -16,7 +16,7 @@ public:
 	std::string Name;
 	HeroeDefs::Side Side;
 
-	std::unique_ptr<class GraphicHero> Graphic;
+	std::shared_ptr<class GraphicHero> Graphic;
 
 	~Hero() = default;
 };

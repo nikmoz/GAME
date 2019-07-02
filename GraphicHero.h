@@ -4,6 +4,7 @@ class GraphicHero
 {
 public:
 	GraphicHero(std::string TexturePath, sf::IntRect StartRect);
+
 	void Animation();//NOTE(Nick):Google about sprite animation
 
 	~GraphicHero()=default;

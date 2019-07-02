@@ -1,7 +1,8 @@
 #include "Render.h"
+Render::Render(int RenderWidth, int RendeHeight) :RendeHeight(RendeHeight), RenderWidth(RenderWidth) {};
 
 void Render::RenderScene() {
-	static sf::RenderWindow WindowScene(sf::VideoMode(Game::WindowWidth,Game::WindowHeight), "Test");
+	static sf::RenderWindow WindowScene(sf::VideoMode(RenderWidth, RendeHeight), "Test");
 
 	if (WindowScene.isOpen())
 	{
@@ -15,27 +16,13 @@ void Render::RenderScene() {
 		}
 
 		WindowScene.clear();
-		for (auto& Char : Game::CurrentScene->Characters) {
-			WindowScene.draw(Char->Graphic->Sprite);
+		for (auto& Char : Characters) {
+			WindowScene.draw(Char->Sprite);
 		}
 		WindowScene.display();
 	}
 };
-void Render::SetupCharacters() {
-	auto HeroCount(0);
-	auto EnemyCount(0);
-	auto SpriteSpace(100);
-
-	for (auto& Char : Game::CurrentScene->Characters) {
-		if (Char->Side == HeroeDefs::hero) {
-			HeroCount++;
-			Char->Graphic->Sprite.setPosition(static_cast<float>(Game::WindowWidth) / 2 - SpriteSpace * HeroCount, static_cast<float>(Game::WindowHeight) / 2);
-			
-		}
-		else if (Char->Side == HeroeDefs::enemy) {
-			EnemyCount++;
-			Char->Graphic->Sprite.setPosition(static_cast<float>(Game::WindowWidth) / 2 + SpriteSpace * EnemyCount, static_cast<float>(Game::WindowHeight) / 2);
-			
-		}
-	}
+void Render::AddCharacter(GraphicHeroPtr Character) 
+{
+	Characters.push_back(Character);
 };
