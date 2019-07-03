@@ -1,74 +1,74 @@
 #include "DOMParser.h"
-TagElement* DOMParser::Root = nullptr;
-TagElement* DOMParser::CurrentElement = nullptr;
-std::stack<std::string> DOMParser::Tags = {};
-TagElement* DOMParser::StartParsing(const std::string& FileName) {
+TagElement* DomParser::Root_ = nullptr;
+TagElement* DomParser::CurrentElement_ = nullptr;
+std::stack<std::string> DomParser::Tags_ = {};
+TagElement* DomParser::StartParsing(const std::string& FileName) {
 	std::string TmpS;
-	std::smatch matches;
+	std::smatch Matches;
 	std::regex StartTag("<[a-zA-z]+>");
 	std::regex EndTag("</[a-zA-z]+>");
 	std::regex Content("[0-9]+");
-	std::ifstream myfile;
-	myfile.open(FileName);
-	getline(myfile, TmpS);
-	while (getline(myfile, TmpS))
+	std::ifstream MyFile;
+	MyFile.open(FileName);
+	getline(MyFile, TmpS);
+	while (getline(MyFile, TmpS))
 	{
-		std::regex_search(TmpS, matches, StartTag);
-		if (!matches.empty()) {
-			FoundStart(matches[0]);
+		std::regex_search(TmpS, Matches, StartTag);
+		if (!Matches.empty()) {
+			FoundStart(Matches[0]);
 		}
-		regex_search(TmpS, matches, Content);
-		if (!matches.empty()) {
-			FoundContent(matches[0]);
+		regex_search(TmpS, Matches, Content);
+		if (!Matches.empty()) {
+			FoundContent(Matches[0]);
 		}
-		regex_search(TmpS, matches, EndTag);
-		if (!matches.empty()) {
-			FoundEnd(matches[0]);
+		regex_search(TmpS, Matches, EndTag);
+		if (!Matches.empty()) {
+			FoundEnd(Matches[0]);
 		}
 	}
-	if (!Tags.empty()) {
-		throw new ExeptionHandler("Some tags aren't closed");
+	if (!Tags_.empty()) {
+		throw ExceptionHandler("Some tags aren't closed");
 	};
-	myfile.close();
-	return Root;
+	MyFile.close();
+	return Root_;
 };
 
-std::string DOMParser::GetTagName(const std::string& Tag) {
+std::string DomParser::GetTagName(const std::string& Tag) {
 	std::smatch TagName;
-	std::regex RegName("[a-zA-z]+");
+	const std::regex RegName("[a-zA-z]+");
 	regex_search(Tag, TagName, RegName);
 	return TagName[0];
 };
 
-void DOMParser::FoundStart(const std::string& Tag)
+void DomParser::FoundStart(const std::string& Tag)
 {
-	std::string TagName = GetTagName(Tag);
-	Tags.push(TagName);
-	if (Root == nullptr) {
-		Root = new TagElement(Root, TagName);
-		CurrentElement = Root;
+	const auto TagName = GetTagName(Tag);
+	Tags_.push(TagName);
+	if (Root_ == nullptr) {
+		Root_ = new TagElement(Root_, TagName);
+		CurrentElement_ = Root_;
 	}
 	else {
-		TagElement* TMP = new TagElement(CurrentElement, TagName);
-		CurrentElement->addChild(TMP);
-		CurrentElement = TMP;
+		const auto Tmp = new TagElement(CurrentElement_, TagName);
+		CurrentElement_->AddChild(Tmp);
+		CurrentElement_ = Tmp;
 	}
 };
 
-void DOMParser::FoundEnd(const std::string& Tag)
+void DomParser::FoundEnd(const std::string& Tag)
 {
-	std::string TagName = GetTagName(Tag);
-	if (Tags.top() == TagName) {
-		Tags.pop();
-		CurrentElement = CurrentElement->getParent();
+	const auto TagName = GetTagName(Tag);
+	if (Tags_.top() == TagName) {
+		Tags_.pop();
+		CurrentElement_ = CurrentElement_->GetParent();
 	}
 	else
 	{
-		throw new ExeptionHandler("Wrong tag order");
+		throw ExceptionHandler("Wrong tag order");
 	}
 };
 
-void DOMParser::FoundContent(const std::string& Content) {
-	CurrentElement->setInnerText(Content);
+void DomParser::FoundContent(const std::string& Content) {
+	CurrentElement_->SetInnerText(Content);
 };
 

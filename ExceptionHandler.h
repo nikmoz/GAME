@@ -2,12 +2,12 @@
 #include <string>
 #include <iostream>
 #include <exception>
-class ExeptionHandler :public std::exception
+class ExceptionHandler final :public std::exception
 {
 private:
-	const char* ErrorMessage;
+	const char* ErrorMessage_;
 public:
 	const char* what() const noexcept override;
-	explicit ExeptionHandler(const char* ErrorMessage);
+	explicit ExceptionHandler(const char* ErrorMessage);
 };
 

@@ -11,7 +11,8 @@ class Hero
 {
 public:
 
-	Hero(std::string Name, const std::string& TexturePath, sf::IntRect StartRect,HeroDefinitions::Side Side);
+	Hero(std::string Name, const std::string& TexturePath, sf::IntRect StartRect, HeroDefinitions::Side Side,
+	     std::chrono::seconds AnimationDuration, int AnimationFrames, int SpriteSpacing);
 	
 	std::string Name;
 	HeroDefinitions::Side Side;

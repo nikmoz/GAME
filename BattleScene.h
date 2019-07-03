@@ -2,7 +2,6 @@
 #include "Hero.h"
 #include "Scene.h"
 #include "Observer.h"
-#include "Action.h"
 #include "InputHandler.h"
 #include <vector>
 
@@ -21,7 +20,7 @@ public:
 	void Update(Keyboard::Keys Key)override;//Reacts to key Input
 
 	void Unload() override {};
-	void Redraw() override;//TODO(Nick): Move Render Instance here from Game class(probably)
+	void Redraw() override;
 
 	void AddCharacter(TargetPtr&& Character) noexcept;
 

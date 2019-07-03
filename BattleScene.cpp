@@ -1,5 +1,6 @@
 #include "BattleScene.h"
 
+#include "Action.h"
 #include "NameAction.h"
 #include "SideAction.h"
 #include "TargetAction.h"
@@ -16,19 +17,20 @@ void BattleScene::AddCharacter(TargetPtr&& Character) noexcept
 {
 	Characters.push_back(Character);
 	Render_->AddCharacter(Character->Graphic);
-};
-/*TODO(Nick):Turn() 
-	Problem 1:How to change targets without passing Characters to Hero Class(tried GameClass with static, but it didn't look nice)
+}
+
+/*THEME(Nick):Turn() 
+	Problem 1:How to change targets without passing Characters to Hero Class
 	Problem 2:Attack and Defend consumes turn, while ChangeTarget doesn't
 	Problem 3:Skill system allows for multiple target types and multiple turn actions, which leads to bigger problem than problem 1
 
 	Solution 1(checking...):
-	Create Action stack and countdown param in Action(Done, but with queue)
-	Create LoadAction() that loads Action list for scene(probably move to global scene load later) (Check next ChooseAction() THEME)
-	Create ChooseAction() that returns Action(Command pattern)(Done)
-	Execute Action, which leads to finding out target and executing one of the functions in Hero(Done)
+	Create Action queue and countdown param in Action (Done)
+	Create LoadAction() that loads Action list for scene(probably move to global scene load later)
+	Create ChooseAction() that returns Action(Command pattern) (Done)
+	Execute Action, which leads to finding out target and executing one of the functions in Hero (Done)
 */
-/*TODO(Nick):ChooseAction()
+/*THEME(Nick):ChooseAction()
 	The way is see it:
 	Battle starts->
 	Some Game function loads characters->
@@ -50,7 +52,7 @@ void BattleScene::AddCharacter(TargetPtr&& Character) noexcept
 			Skill calls LoadSkills for current Hero, creating new set of actions
 			Argument:
 				No copies of standard actions in standard encounters
-				This will move all Action resolving staff into Hero class, and easy tom implement, 
+				This will move all Action resolving staff into Hero class, and easy to implement, 
 				but I'l be stuck with same Attack,Defend, Skill (and future Party) pattern
 		Solution 3:
 			Keep it that way, and think of format, that can save all information needed
@@ -75,10 +77,6 @@ void BattleScene::AddCharacter(TargetPtr&& Character) noexcept
 				Loads skills only if needed
 
 	Root 3: Separated Scene and render means InputHandler code duplication(Solved)
-		Solution 1:
-			Create static InputHandler class that notifies each sub on key input. Make Scene and Render subs.(Done)
-		Solution 2:
-			Create static InputHandler class that sends Action to each sub. Make Scene and Render subs.
 */
 
 ActionPtr BattleScene::ChooseAction(const Keyboard::Keys Key)//TODO(Nick):Read about Factory method
@@ -152,21 +150,31 @@ void BattleScene::UpdateScene()
 
 void BattleScene::Redraw()
 {
+	
 	Render_->RenderScene();
+
+	for (auto& Char:Characters)
+	{
+		Char->Graphic->Update();
+	}
 };
 
 void BattleScene::Load()//TODO(Nick): Figure out normal loading variant
 {
 	Render_ = std::make_unique<class Render>(400,400);
 
-	TargetPtr Uther(new Hero("Uther", "res/img/sprite_base_addon_2012_12_14.png", sf::IntRect(10, 10, 70, 70),
-	                         HeroDefinitions::Hero));
-	TargetPtr AUther(new Hero("Arthas", "res/img/sprite_base_addon_2012_12_14.png", sf::IntRect(10, 10, 70, 70),
-	                          HeroDefinitions::Enemy));
+	using  namespace  std::chrono_literals;
+
+	TargetPtr Uther(new Hero("Uther", "res/img/sprite_base_addon_2012_12_14.png", sf::IntRect(21, 25, 17, 28),
+	                         HeroDefinitions::Hero,2s,4,47));
+	TargetPtr AUther(new Hero("Arthas", "res/img/sprite_base_addon_2012_12_14.png", sf::IntRect(21, 25, 17, 28),
+	                          HeroDefinitions::Enemy,2s,4,47));
 
 	AddCharacter(move(Uther));
 	AddCharacter(move(AUther));
+
 	SetupCharactersPosition();
+
 
 	this->Actions_.push_back(ActionPtr(new NameAction));
 	this->Actions_.push_back(ActionPtr(new SideAction));
@@ -182,7 +190,7 @@ bool BattleScene::CheckActionQueue()//NOTE(Nick): Cause some actions may have co
 	}
 
 	auto CurrentAction = ActionQueue_.front().first;
-	const auto CurrentHero = ActionQueue_.front().second;
+	auto CurrentHero = ActionQueue_.front().second;
 
 	CurrentAction->Execute(*CurrentHero);
 
@@ -200,7 +208,7 @@ void BattleScene::SetupCharactersPosition() noexcept//NOTE(Nick):still not sure 
 	auto EnemyCount(0);
 	const auto SpriteSpace(100);
 
-	for (auto& Char : Characters)
+	for (auto& Char : Characters)//NOTE(Nick): If I could guarantee that Characters list is order by side, I could move this to Render class
 	{
 		if (Char->Side == HeroDefinitions::Hero) {
 			HeroCount++;

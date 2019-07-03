@@ -2,6 +2,6 @@
 #include <list>
 class Element {
 public:
-	Element* parent;
-	std::list<Element*> children;
+	Element* Parent;
+	std::list<Element*> Children;
 };

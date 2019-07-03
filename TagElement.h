@@ -5,21 +5,21 @@
 class TagElement
 {
 private:
-	TagElement* parent;
-	std::vector<TagElement*> children;
-	std::string name;
-	std::string InnerText;
+	TagElement* Parent_;
+	std::vector<TagElement*> Children_;
+	std::string Name_;
+	std::string InnerText_;
 public:
-	void setInnerText(const std::string& InnerText);
-	std::string getInnerText() const;
+	void SetInnerText(const std::string& InnerText);
+	std::string GetInnerText() const;
 
-	std::string getname() const;
+	std::string GetName() const;
 
-	void addChild(TagElement* Child);
-	std::vector<TagElement*> getChild() const;
+	void AddChild(TagElement* Child);
+	std::vector<TagElement*> GetChild() const;
 
-	TagElement* getParent()const;
+	TagElement* GetParent()const;
 
-	TagElement(TagElement* parent,std::string name);
+	TagElement(TagElement* Parent,std::string Name);
 };
 

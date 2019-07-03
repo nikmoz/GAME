@@ -1,20 +1,20 @@
 #include "TagElement.h"
-TagElement::TagElement(TagElement* parent, std::string name) :parent(parent), name(std::move(name)) {};
-void TagElement::setInnerText(const std::string& InnerText) {
-	this->InnerText = InnerText;
+TagElement::TagElement(TagElement* Parent, std::string Name) :Parent_(Parent), Name_(std::move(Name)) {};
+void TagElement::SetInnerText(const std::string& InnerText) {
+	this->InnerText_ = InnerText;
 }
-void TagElement::addChild(TagElement* Child) {
-	this->children.push_back(Child);
+void TagElement::AddChild(TagElement* Child) {
+	this->Children_.push_back(Child);
 }
-TagElement* TagElement::getParent() const {
-	return this->parent;
+TagElement* TagElement::GetParent() const {
+	return this->Parent_;
 }
-std::vector<TagElement*> TagElement::getChild() const {
-	return this->children;
+std::vector<TagElement*> TagElement::GetChild() const {
+	return this->Children_;
 }
-std::string TagElement::getInnerText() const {
-	return this->InnerText;
+std::string TagElement::GetInnerText() const {
+	return this->InnerText_;
 }
-std::string TagElement::getname() const {
-	return this->name;
+std::string TagElement::GetName() const {
+	return this->Name_;
 }

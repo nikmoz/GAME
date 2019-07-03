@@ -146,8 +146,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Action.cpp" />
+    <ClCompile Include="AutoIncrementer.cpp" />
     <ClCompile Include="DOMParser.cpp" />
-    <ClCompile Include="ExeptionHandler.cpp" />
+    <ClCompile Include="ExceptionHandler.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GraphicHero.cpp" />
     <ClCompile Include="Hero.cpp" />
@@ -167,9 +168,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Action.h" />
+    <ClInclude Include="AutoIncrementer.h" />
     <ClInclude Include="DOMParser.h" />
     <ClInclude Include="Element.h" />
-    <ClInclude Include="ExeptionHandler.h" />
+    <ClInclude Include="ExceptionHandler.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GraphicHero.h" />
     <ClInclude Include="Hero.h" />
@@ -184,7 +186,6 @@
     <ClInclude Include="TargetAction.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="res\img\sorlosheet.png" />
     <Image Include="res\img\sprite_base_addon_2012_12_14.png" />
   </ItemGroup>
   <ItemGroup>

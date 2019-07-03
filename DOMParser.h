@@ -5,12 +5,12 @@
 #include <regex>
 #include <stack>
 #include "TagElement.h"
-#include "ExeptionHandler.h"
-class DOMParser {
+#include "ExceptionHandler.h"
+class DomParser {
 private:
-	static TagElement* Root;
-	static TagElement* CurrentElement;
-	static std::stack<std::string> Tags;
+	static TagElement* Root_;
+	static TagElement* CurrentElement_;
+	static std::stack<std::string> Tags_;
 	static void FoundStart(const std::string& Tag);
 	static void FoundEnd(const std::string& Tag);
 	static void FoundContent(const std::string& Content);

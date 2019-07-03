@@ -39,9 +39,6 @@
     <ClCompile Include="GraphicHero.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ExeptionHandler.cpp">
-      <Filter>Header Files\XML-parser</Filter>
-    </ClCompile>
     <ClCompile Include="DOMParser.cpp">
       <Filter>Header Files\XML-parser</Filter>
     </ClCompile>
@@ -72,6 +69,12 @@
     <ClCompile Include="Scene.cpp">
       <Filter>Header Files\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="ExceptionHandler.cpp">
+      <Filter>Header Files\XML-parser</Filter>
+    </ClCompile>
+    <ClCompile Include="AutoIncrementer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include=".clang-tidy" />
@@ -93,9 +96,6 @@
       <Filter>Header Files\XML-parser</Filter>
     </ClInclude>
     <ClInclude Include="TagElement.h">
-      <Filter>Header Files\XML-parser</Filter>
-    </ClInclude>
-    <ClInclude Include="ExeptionHandler.h">
       <Filter>Header Files\XML-parser</Filter>
     </ClInclude>
     <ClInclude Include="Element.h">
@@ -125,11 +125,14 @@
     <ClInclude Include="Scene.h">
       <Filter>Header Files\Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="ExceptionHandler.h">
+      <Filter>Header Files\XML-parser</Filter>
+    </ClInclude>
+    <ClInclude Include="AutoIncrementer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="res\img\sorlosheet.png">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="res\img\sprite_base_addon_2012_12_14.png">
       <Filter>Resource Files</Filter>
     </Image>
