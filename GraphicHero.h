@@ -1,5 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <fstream>
+#include "TagXMLParser.h"
 #include <chrono>
 #include "AutoIncrementer.h"
 
@@ -7,7 +9,7 @@ using namespace std::chrono_literals;
 class GraphicHero
 {
 public:
-	GraphicHero(const std::string& TexturePath, sf::IntRect StartRect,std::chrono::seconds AnimationDuration, int AnimationFrames, int SpriteSpacing);
+	explicit GraphicHero(const std::string& FilePath);
 
 	void Update();//NOTE(Nick):Google about sprite animation
 
@@ -17,7 +19,7 @@ public:
 private:
 	//AutoIncrementer<sf::Sprite> AnimationIncrement_;
 
-	std::chrono::seconds AnimationDuration_;
+	int AnimationDuration_;
 	int AnimationFrames_;
 	int SpriteSpacing_;
 

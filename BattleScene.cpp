@@ -159,19 +159,20 @@ void BattleScene::Redraw()
 	}
 };
 
-void BattleScene::Load()//TODO(Nick): Figure out normal loading variant
+void BattleScene::Load(const std::string& FileName)//TODO(Nick): Figure out normal loading variant
 {
+	std::ifstream SceneFile;
+	SceneFile.open(FileName);
+
 	Render_ = std::make_unique<class Render>(400,400);
 
 	using  namespace  std::chrono_literals;
 
-	TargetPtr Uther(new Hero("Uther", "res/img/sprite_base_addon_2012_12_14.png", sf::IntRect(21, 25, 17, 28),
-	                         HeroDefinitions::Hero,2s,4,47));
-	TargetPtr AUther(new Hero("Arthas", "res/img/sprite_base_addon_2012_12_14.png", sf::IntRect(21, 25, 17, 28),
-	                          HeroDefinitions::Enemy,2s,4,47));
-
-	AddCharacter(move(Uther));
-	AddCharacter(move(AUther));
+	auto Characters=TagXmlParser::FindAllTags<std::string>(SceneFile,"Hero");
+	for (const auto& Char:Characters)
+	{
+		AddCharacter(std::make_shared<Hero>(Char));
+	}
 
 	SetupCharactersPosition();
 
@@ -180,6 +181,7 @@ void BattleScene::Load()//TODO(Nick): Figure out normal loading variant
 	this->Actions_.push_back(ActionPtr(new SideAction));
 	this->Actions_.push_back(ActionPtr(new TargetAction));
 
+	SceneFile.close();
 }
 
 bool BattleScene::CheckActionQueue()//NOTE(Nick): Cause some actions may have countdown, i probably should switch to vector instead of queue

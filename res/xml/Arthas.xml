@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Hero>
+  <Game>
+    <Name>
+      Arthas
+    </Name>
+    <Side>
+      Enemy
+    </Side>
+  </Game>
+  <Graphic>
+    <TexturePath>
+      res/img/sprite_base_addon_2012_12_14.png
+    </TexturePath>
+    <StartRect>
+      <Left>
+        21
+      </Left>
+      <Top>
+        25
+      </Top>
+      <Width>
+        17
+      </Width>
+      <Height>
+        28
+      </Height>
+    </StartRect>
+    <AnimationFrames>
+      4
+    </AnimationFrames>
+    <AnimationDuration>
+      2
+    </AnimationDuration>
+    <SpriteSpacing>
+      47
+    </SpriteSpacing>
+  </Graphic>
+</Hero>

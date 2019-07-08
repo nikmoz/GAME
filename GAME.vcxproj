@@ -147,8 +147,6 @@
   <ItemGroup>
     <ClCompile Include="Action.cpp" />
     <ClCompile Include="AutoIncrementer.cpp" />
-    <ClCompile Include="DOMParser.cpp" />
-    <ClCompile Include="ExceptionHandler.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GraphicHero.cpp" />
     <ClCompile Include="Hero.cpp" />
@@ -160,7 +158,6 @@
     <ClCompile Include="NameAction.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SideAction.cpp" />
-    <ClCompile Include="TagElement.cpp" />
     <ClCompile Include="TargetAction.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -169,9 +166,6 @@
   <ItemGroup>
     <ClInclude Include="Action.h" />
     <ClInclude Include="AutoIncrementer.h" />
-    <ClInclude Include="DOMParser.h" />
-    <ClInclude Include="Element.h" />
-    <ClInclude Include="ExceptionHandler.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GraphicHero.h" />
     <ClInclude Include="Hero.h" />
@@ -182,14 +176,16 @@
     <ClInclude Include="NameAction.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SideAction.h" />
-    <ClInclude Include="TagElement.h" />
+    <ClInclude Include="TagXMLParser.h" />
     <ClInclude Include="TargetAction.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\img\sprite_base_addon_2012_12_14.png" />
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="res\Standart.xml" />
+    <Xml Include="res\xml\Arthas.xml" />
+    <Xml Include="res\xml\Scene.xml" />
+    <Xml Include="res\xml\Uther.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

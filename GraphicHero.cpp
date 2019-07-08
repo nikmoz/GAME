@@ -1,14 +1,31 @@
 #include "GraphicHero.h"
 
 #include  <iostream>
-GraphicHero::GraphicHero(const std::string& TexturePath, const sf::IntRect StartRect, const std::chrono::seconds AnimationDuration, const int AnimationFrames, const int SpriteSpacing)
-:AnimationDuration_(AnimationDuration),AnimationFrames_(AnimationFrames),SpriteSpacing_(SpriteSpacing),StartRect_(StartRect)
+GraphicHero::GraphicHero(const std::string& FilePath)
 {
+	std::ifstream GraphicFile;
+	GraphicFile.open(FilePath);
+
+	auto TexturePath=TagXmlParser::FindTag<std::string>(GraphicFile,"TexturePath");
+
+	AnimationDuration_=TagXmlParser::FindTag<int>(GraphicFile,"AnimationDuration");
+	AnimationFrames_=TagXmlParser::FindTag<int>(GraphicFile,"AnimationFrames");
+	SpriteSpacing_=TagXmlParser::FindTag<int>(GraphicFile,"SpriteSpacing");
+
+	auto Left=TagXmlParser::FindTag<int>(GraphicFile,"Left");
+	auto Top=TagXmlParser::FindTag<int>(GraphicFile,"Top");
+	auto Width=TagXmlParser::FindTag<int>(GraphicFile,"Width");
+	auto Height=TagXmlParser::FindTag<int>(GraphicFile,"Height");
+
+	StartRect_=sf::IntRect(Left, Top, Width, Height);
+
 	this->Texture_.loadFromFile(TexturePath);
 	this->Sprite.setTexture(this->Texture_);
-	this->Sprite.setTextureRect(StartRect);
+	this->Sprite.setTextureRect(StartRect_);
 
 	EndRect_=StartRect_.left+(StartRect_.width+SpriteSpacing_)*AnimationFrames_;
+
+	GraphicFile.close();
 }
 /*THEME(Nick):Animation()
 {

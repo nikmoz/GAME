@@ -22,5 +22,5 @@ void Game::InitScene()
 {
 	Game::CurrentScene = std::make_shared<BattleScene>();
 	
-	Game::CurrentScene->Load();
+	Game::CurrentScene->Load("res/xml/Scene.xml");
 };

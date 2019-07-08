@@ -4,7 +4,8 @@
 #include "Observer.h"
 #include "InputHandler.h"
 #include <vector>
-
+#include <fstream>
+#include "TagXMLParser.h"
 
 class BattleScene:public Scene,public Observer
 {
@@ -14,7 +15,7 @@ public:
 	~BattleScene() = default;
 
 
-	void Load() override;
+	void Load(const std::string& FileName) override;
 
 	void UpdateScene() override; //Calculates scene next state
 	void Update(Keyboard::Keys Key)override;//Reacts to key Input

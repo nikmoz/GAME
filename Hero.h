@@ -1,8 +1,11 @@
 #pragma once
 
 #include <string>
-#include "GraphicHero.h"
+#include <fstream>
 #include <memory>
+#include "GraphicHero.h"
+#include "TagXMLParser.h"
+
 namespace HeroDefinitions {
 	enum Side{Hero,Enemy};
 };
@@ -11,8 +14,7 @@ class Hero
 {
 public:
 
-	Hero(std::string Name, const std::string& TexturePath, sf::IntRect StartRect, HeroDefinitions::Side Side,
-	     std::chrono::seconds AnimationDuration, int AnimationFrames, int SpriteSpacing);
+	explicit Hero(const std::string& FileName);
 	
 	std::string Name;
 	HeroDefinitions::Side Side;

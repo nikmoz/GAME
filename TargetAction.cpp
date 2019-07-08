@@ -62,8 +62,8 @@ void TargetAction::Update(const Keyboard::Keys Key)
 	if (TargetIndex == -1) {
 		return;
 	}
-	
+
 	std::cout << "Target Name:" << PossibleTargets_.at(TargetIndex)->Name << std::endl;
-	
+
 	IsResolved = true;
 }
