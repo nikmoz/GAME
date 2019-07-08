@@ -10,6 +10,7 @@ class GraphicHero
 {
 public:
 	explicit GraphicHero(const std::string& FilePath);
+	explicit GraphicHero(std::ifstream& GraphicFile);
 
 	void Update();//NOTE(Nick):Google about sprite animation
 

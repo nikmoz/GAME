@@ -18,9 +18,7 @@ Hero::Hero(const std::string& FileName)
 		Side=HeroDefinitions::Enemy;
 	}
 
-
-
-	Graphic = std::make_unique<GraphicHero>(FileName);
+	Graphic = std::make_unique<GraphicHero>(HeroFile);
 
 	HeroFile.close();
 }
