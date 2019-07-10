@@ -16,11 +16,11 @@ void TargetAction::InitTargetAction(Hero& Actor)
 	}
 };
 
-int TargetAction::ChooseTarget(const Keyboard::Keys Key)
+int TargetAction::ChooseTarget(const sf::Keyboard::Key Key)
 {
 	static auto I(0U);
 
-	if (Key == Keyboard::Left)
+	if (Key == sf::Keyboard::Left)
 	{
 		if (I > 0)
 		{
@@ -29,7 +29,7 @@ int TargetAction::ChooseTarget(const Keyboard::Keys Key)
 		return -1;
 	}
 
-	if (Key == Keyboard::Right)
+	if (Key == sf::Keyboard::Right)
 	{
 		if (I < PossibleTargets_.size() - 1)
 		{
@@ -38,7 +38,7 @@ int TargetAction::ChooseTarget(const Keyboard::Keys Key)
 		return -1;
 	}
 
-	if (Key == Keyboard::Enter)
+	if (Key == sf::Keyboard::Enter)
 	{
 		const auto Tmp = I;
 		I = 0;
@@ -55,7 +55,7 @@ void TargetAction::Execute(Hero& Actor)
 	TargetInputHandler_->HandleInput();
 }
 
-void TargetAction::Update(const Keyboard::Keys Key)
+void TargetAction::Update(const sf::Keyboard::Key Key)
 {
 	const auto TargetIndex = ChooseTarget(Key);
 

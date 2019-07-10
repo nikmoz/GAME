@@ -5,7 +5,7 @@
 #include "InputHandler.h"
 #include <vector>
 #include <fstream>
-#include "TagXMLParser.h"
+#include "TagXmlParser.h"
 
 class BattleScene:public Scene,public Observer
 {
@@ -18,7 +18,7 @@ public:
 	void Load(const std::string& FileName) override;
 
 	void UpdateScene() override; //Calculates scene next state
-	void Update(Keyboard::Keys Key)override;//Reacts to key Input
+	void Update(sf::Keyboard::Key Key)override;//Reacts to key Input
 
 	void Unload() override {};
 	void Redraw() override;
@@ -34,7 +34,7 @@ private:
 	std::unique_ptr<class InputHandler> TurnInputHandler_;
 	
 	std::vector<ActionPtr> Actions_;
-	ActionPtr ChooseAction(Keyboard::Keys Key);
+	ActionPtr ChooseAction(sf::Keyboard::Key Key);
 	bool CheckActionQueue();
 	
 };

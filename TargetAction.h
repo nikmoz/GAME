@@ -15,11 +15,11 @@ public:
 	~TargetAction() = default;
 
 	void Execute(Hero& Actor) override;
-	void Update(Keyboard::Keys Key) override;
+	void Update(sf::Keyboard::Key Key) override;
 private:
 
 	virtual void InitTargetAction(Hero& Actor);
-	virtual int ChooseTarget(Keyboard::Keys Key);
+	virtual int ChooseTarget(sf::Keyboard::Key Key);
 
 	std::vector<TargetPtr> PossibleTargets_ = {};
 

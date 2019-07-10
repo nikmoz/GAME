@@ -79,11 +79,11 @@ void BattleScene::AddCharacter(TargetPtr&& Character) noexcept
 	Root 3: Separated Scene and render means InputHandler code duplication(Solved)
 */
 
-ActionPtr BattleScene::ChooseAction(const Keyboard::Keys Key)//TODO(Nick):Read about Factory method
+ActionPtr BattleScene::ChooseAction(const sf::Keyboard::Key Key)//TODO(Nick):Read about Factory method
 {
 	static auto I(0U);
 
-	if (Key==Keyboard::Down)
+	if (Key==sf::Keyboard::Down)
 	{
 		if (I < Actions_.size() - 1)
 		{
@@ -94,7 +94,7 @@ ActionPtr BattleScene::ChooseAction(const Keyboard::Keys Key)//TODO(Nick):Read a
 		return nullptr;
 	}
 
-	if (Key == Keyboard::Up)
+	if (Key ==sf::Keyboard::Up)
 	{
 		if (I > 0)
 		{
@@ -105,7 +105,7 @@ ActionPtr BattleScene::ChooseAction(const Keyboard::Keys Key)//TODO(Nick):Read a
 		return nullptr;
 	}
 
-	if (Key == Keyboard::Enter)
+	if (Key == sf::Keyboard::Enter)
 	{
 		const auto Tmp = I;
 			I = 0;
@@ -116,7 +116,7 @@ ActionPtr BattleScene::ChooseAction(const Keyboard::Keys Key)//TODO(Nick):Read a
 	return nullptr;
 };
 
-void BattleScene::Update(const Keyboard::Keys Key)
+void BattleScene::Update(const sf::Keyboard::Key Key)
 {
 	auto TurnAction = ChooseAction(Key);
 

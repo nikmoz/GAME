@@ -1,7 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <fstream>
-#include "TagXMLParser.h"
+#include "TagXmlParser.h"
 #include <chrono>
 #include "AutoIncrementer.h"
 
@@ -11,6 +11,8 @@ class GraphicHero
 public:
 	explicit GraphicHero(const std::string& FilePath);
 	explicit GraphicHero(std::ifstream& GraphicFile);
+
+	std::shared_ptr<class Hero> Game;
 
 	void Update();//NOTE(Nick):Google about sprite animation
 

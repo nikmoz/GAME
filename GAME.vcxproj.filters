@@ -1,118 +1,77 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\XML-parser">
-      <UniqueIdentifier>{af39235a-ef73-4d04-ba80-578582f038db}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Actions">
+    <Filter Include="Actions">
       <UniqueIdentifier>{138eff8e-0bc7-47bb-b98d-09f4d939aa36}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Scenes">
+    <Filter Include="Scenes">
       <UniqueIdentifier>{c95661db-7104-4601-a077-2fb51eb0ce11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="XML-parser">
+      <UniqueIdentifier>{af39235a-ef73-4d04-ba80-578582f038db}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Hero.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Render.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GraphicHero.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SideAction.cpp">
-      <Filter>Header Files\Actions</Filter>
+      <Filter>Actions</Filter>
     </ClCompile>
     <ClCompile Include="NameAction.cpp">
-      <Filter>Header Files\Actions</Filter>
-    </ClCompile>
-    <ClCompile Include="InputHandler.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Observer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Action.cpp">
-      <Filter>Header Files\Actions</Filter>
+      <Filter>Actions</Filter>
     </ClCompile>
     <ClCompile Include="TargetAction.cpp">
-      <Filter>Header Files\Actions</Filter>
+      <Filter>Actions</Filter>
     </ClCompile>
     <ClCompile Include="BattleScene.cpp">
-      <Filter>Header Files\Scenes</Filter>
+      <Filter>Scenes</Filter>
     </ClCompile>
     <ClCompile Include="Scene.cpp">
-      <Filter>Header Files\Scenes</Filter>
+      <Filter>Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="AutoIncrementer.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Action.cpp">
+      <Filter>Actions</Filter>
     </ClCompile>
+    <ClCompile Include="AutoIncrementer.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GraphicHero.cpp" />
+    <ClCompile Include="Hero.cpp" />
+    <ClCompile Include="InputHandler.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Observer.cpp" />
+    <ClCompile Include="Render.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include=".clang-tidy" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Hero.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Render.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GraphicHero.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Action.h">
-      <Filter>Header Files\Actions</Filter>
+      <Filter>Actions</Filter>
     </ClInclude>
     <ClInclude Include="NameAction.h">
-      <Filter>Header Files\Actions</Filter>
+      <Filter>Actions</Filter>
     </ClInclude>
     <ClInclude Include="SideAction.h">
-      <Filter>Header Files\Actions</Filter>
-    </ClInclude>
-    <ClInclude Include="InputHandler.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Observer.h">
-      <Filter>Header Files</Filter>
+      <Filter>Actions</Filter>
     </ClInclude>
     <ClInclude Include="TargetAction.h">
-      <Filter>Header Files\Actions</Filter>
+      <Filter>Actions</Filter>
     </ClInclude>
     <ClInclude Include="BattleScene.h">
-      <Filter>Header Files\Scenes</Filter>
+      <Filter>Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Scene.h">
-      <Filter>Header Files\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="AutoIncrementer.h">
-      <Filter>Header Files</Filter>
+      <Filter>Scenes</Filter>
     </ClInclude>
     <ClInclude Include="TagXMLParser.h">
-      <Filter>Header Files\XML-parser</Filter>
+      <Filter>XML-parser</Filter>
     </ClInclude>
+    <ClInclude Include="Render.h" />
+    <ClInclude Include="AutoIncrementer.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="GraphicHero.h" />
+    <ClInclude Include="Hero.h" />
+    <ClInclude Include="InputHandler.h" />
+    <ClInclude Include="Observer.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\img\sprite_base_addon_2012_12_14.png">
