@@ -21,8 +21,11 @@ public:
 	sf::Sprite Sprite;
 private:
 	//AutoIncrementer<sf::Sprite> AnimationIncrement_;
+	double OldTime_=0;
+	double NewTime_=0;
+	//double TotalTime_=0;
 
-	int AnimationDuration_;
+	double AnimationDuration_;
 	int AnimationFrames_;
 	int SpriteSpacing_;
 

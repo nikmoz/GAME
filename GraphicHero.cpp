@@ -32,7 +32,7 @@ GraphicHero::GraphicHero(std::ifstream& GraphicFile)
 {
 	const auto TexturePath=TagXmlParser::FindTag<std::string>(GraphicFile,"TexturePath");
 
-	AnimationDuration_=TagXmlParser::FindTag<int>(GraphicFile,"AnimationDuration");
+	AnimationDuration_=TagXmlParser::FindTag<double>(GraphicFile,"AnimationDuration");
 	AnimationFrames_=TagXmlParser::FindTag<int>(GraphicFile,"AnimationFrames");
 	SpriteSpacing_=TagXmlParser::FindTag<int>(GraphicFile,"SpriteSpacing");
 
@@ -55,16 +55,23 @@ GraphicHero::GraphicHero(std::ifstream& GraphicFile)
 
 void GraphicHero::Update()
 {
-	if (Sprite.getTextureRect().left>=EndRect_)
-	{
-		Sprite.setTextureRect(StartRect_);
-	}
-	else
+    NewTime_=clock()/1000.0;
+		
+	if (NewTime_-OldTime_>=AnimationDuration_/static_cast<double>(AnimationFrames_))
 	{
 
+		OldTime_=NewTime_;
 		const sf::IntRect NextRect(Sprite.getTextureRect().left + Sprite.getTextureRect().width + SpriteSpacing_,
-		                     Sprite.getTextureRect().top, Sprite.getTextureRect().width,
-		                     Sprite.getTextureRect().height);
-		Sprite.setTextureRect(NextRect);
+			                     Sprite.getTextureRect().top, Sprite.getTextureRect().width,
+			                     Sprite.getTextureRect().height);
+		if (NextRect.left>=EndRect_)
+		{
+			Sprite.setTextureRect(StartRect_);
+
+		}
+		else
+		{
+			Sprite.setTextureRect(NextRect);
+		}
 	}
 }
