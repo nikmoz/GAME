@@ -14,6 +14,9 @@
     <Filter Include="XML-parser">
       <UniqueIdentifier>{af39235a-ef73-4d04-ba80-578582f038db}</UniqueIdentifier>
     </Filter>
+    <Filter Include="StateMachine">
+      <UniqueIdentifier>{5b0ef17b-34d7-457f-95e3-b2c9f13d7e67}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SideAction.cpp">
@@ -42,6 +45,12 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Observer.cpp" />
     <ClCompile Include="Render.cpp" />
+    <ClCompile Include="StateMachine.cpp">
+      <Filter>StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="StateNode.cpp">
+      <Filter>StateMachine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Action.h">
@@ -72,6 +81,12 @@
     <ClInclude Include="Hero.h" />
     <ClInclude Include="InputHandler.h" />
     <ClInclude Include="Observer.h" />
+    <ClInclude Include="StateMachine.h">
+      <Filter>StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="StateNode.h">
+      <Filter>StateMachine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\img\sprite_base_addon_2012_12_14.png">
