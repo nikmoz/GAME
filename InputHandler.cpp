@@ -6,6 +6,8 @@ InputHandler::InputHandler()
 	{
 		Key_[static_cast<sf::Keyboard::Key>(I)]=KeyState::Released;
 	}
+
+
 }
 
 

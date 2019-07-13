@@ -185,6 +185,8 @@
   </ItemGroup>
   <ItemGroup>
     <Xml Include="res\xml\Arthas.xml" />
+    <Xml Include="res\xml\Chosen.xml" />
+    <Xml Include="res\xml\Idle.xml" />
     <Xml Include="res\xml\Scene.xml" />
     <Xml Include="res\xml\Uther.xml" />
   </ItemGroup>

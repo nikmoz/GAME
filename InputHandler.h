@@ -3,6 +3,7 @@
 #include <vector>
 #include <memory>
 #include <map>
+
 #include <SFML/Window/Keyboard.hpp>
 
 using Subscriber=std::shared_ptr<class Observer>;

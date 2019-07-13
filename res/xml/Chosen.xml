@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Animation>
+  <SpriteRect>
+    <Left>
+      21
+    </Left>
+    <Top>
+      25
+    </Top>
+    <Width>
+      17
+    </Width>
+    <Height>
+      28
+    </Height>
+  </SpriteRect>
+  <AnimationFrames>
+    4
+  </AnimationFrames>
+  <AnimationDuration>
+    0.5
+  </AnimationDuration>
+  <SpriteSpacing>
+    47
+  </SpriteSpacing>
+</Animation>

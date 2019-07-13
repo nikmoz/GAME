@@ -17,6 +17,21 @@
     <Filter Include="StateMachine">
       <UniqueIdentifier>{5b0ef17b-34d7-457f-95e3-b2c9f13d7e67}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Sprites">
+      <UniqueIdentifier>{289b27ac-4df5-4ce6-8fbb-ff8f10f1e48c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Heroes">
+      <UniqueIdentifier>{78a5328f-c300-4929-b099-e615b99e2196}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Animations">
+      <UniqueIdentifier>{defe1621-2475-426f-89a9-f2619536cbe1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Scenes">
+      <UniqueIdentifier>{6858d5cc-170e-4b2a-9d53-ccff45e4a3cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hero">
+      <UniqueIdentifier>{1663a47b-dadc-4593-890e-2b28ffe88a37}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SideAction.cpp">
@@ -39,8 +54,6 @@
     </ClCompile>
     <ClCompile Include="AutoIncrementer.cpp" />
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="GraphicHero.cpp" />
-    <ClCompile Include="Hero.cpp" />
     <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Observer.cpp" />
@@ -50,6 +63,12 @@
     </ClCompile>
     <ClCompile Include="StateNode.cpp">
       <Filter>StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicHero.cpp">
+      <Filter>Hero</Filter>
+    </ClCompile>
+    <ClCompile Include="Hero.cpp">
+      <Filter>Hero</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -77,8 +96,6 @@
     <ClInclude Include="Render.h" />
     <ClInclude Include="AutoIncrementer.h" />
     <ClInclude Include="Game.h" />
-    <ClInclude Include="GraphicHero.h" />
-    <ClInclude Include="Hero.h" />
     <ClInclude Include="InputHandler.h" />
     <ClInclude Include="Observer.h" />
     <ClInclude Include="StateMachine.h">
@@ -87,21 +104,33 @@
     <ClInclude Include="StateNode.h">
       <Filter>StateMachine</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="res\img\sprite_base_addon_2012_12_14.png">
-      <Filter>Resource Files</Filter>
-    </Image>
+    <ClInclude Include="GraphicHero.h">
+      <Filter>Hero</Filter>
+    </ClInclude>
+    <ClInclude Include="Hero.h">
+      <Filter>Hero</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="res\xml\Arthas.xml">
-      <Filter>Resource Files</Filter>
-    </Xml>
-    <Xml Include="res\xml\Scene.xml">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\Heroes</Filter>
     </Xml>
     <Xml Include="res\xml\Uther.xml">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\Heroes</Filter>
     </Xml>
+    <Xml Include="res\xml\Scene.xml">
+      <Filter>Resource Files\Scenes</Filter>
+    </Xml>
+    <Xml Include="res\xml\Idle.xml">
+      <Filter>Resource Files\Animations</Filter>
+    </Xml>
+    <Xml Include="res\xml\Chosen.xml">
+      <Filter>Resource Files\Animations</Filter>
+    </Xml>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\img\sprite_base_addon_2012_12_14.png">
+      <Filter>Resource Files\Sprites</Filter>
+    </Image>
   </ItemGroup>
 </Project>

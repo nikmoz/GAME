@@ -1,9 +1,15 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <fstream>
-#include "TagXmlParser.h"
+#include "TagXMLParser.h"
 #include <chrono>
-#include "AutoIncrementer.h"
+#include <map>
+
+enum class AnimationState
+{
+	Idle,
+	Chosen
+};
 
 using namespace std::chrono_literals;
 class GraphicHero
@@ -14,24 +20,27 @@ public:
 
 	std::shared_ptr<class Hero> Game;
 
+	void LoadAnimation(AnimationState Animation);
 	void Update();//NOTE(Nick):Google about sprite animation
 
 	~GraphicHero()=default;
 
 	sf::Sprite Sprite;
 private:
+	std::map<AnimationState,std::string> AnimationMap_;
+
 	//AutoIncrementer<sf::Sprite> AnimationIncrement_;
 	double OldTime_=0;
 	double NewTime_=0;
 	//double TotalTime_=0;
 
-	double AnimationDuration_;
-	int AnimationFrames_;
-	int SpriteSpacing_;
+	double AnimationDuration_{};
+	int AnimationFrames_{};
+	int SpriteSpacing_{};
 
 	sf::Texture Texture_;
 
-	int EndRect_;
-	sf::IntRect StartRect_;
+	int EndRect_{};
+	sf::IntRect SpriteRect_;
 };
 

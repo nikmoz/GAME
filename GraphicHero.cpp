@@ -1,6 +1,5 @@
 #include "GraphicHero.h"
 
-#include  <iostream>
 GraphicHero::GraphicHero(const std::string& FilePath)
 {
 	std::ifstream GraphicFile;
@@ -8,22 +7,17 @@ GraphicHero::GraphicHero(const std::string& FilePath)
 
 	const auto TexturePath=TagXmlParser::FindTag<std::string>(GraphicFile,"TexturePath");
 
-	AnimationDuration_=TagXmlParser::FindTag<int>(GraphicFile,"AnimationDuration");
-	AnimationFrames_=TagXmlParser::FindTag<int>(GraphicFile,"AnimationFrames");
-	SpriteSpacing_=TagXmlParser::FindTag<int>(GraphicFile,"SpriteSpacing");
+	std::pair<AnimationState,std::string> IdleAnim(AnimationState::Idle,TagXmlParser::FindTag<std::string>(GraphicFile,"Idle"));
+	AnimationMap_.emplace(IdleAnim);
 
-	const auto Left=TagXmlParser::FindTag<int>(GraphicFile,"Left");
-	const auto Top=TagXmlParser::FindTag<int>(GraphicFile,"Top");
-	const auto Width=TagXmlParser::FindTag<int>(GraphicFile,"Width");
-	const auto Height=TagXmlParser::FindTag<int>(GraphicFile,"Height");
-
-	StartRect_=sf::IntRect(Left, Top, Width, Height);
+	std::pair<AnimationState,std::string> ChosenAnim(AnimationState::Chosen,TagXmlParser::FindTag<std::string>(GraphicFile,"Chosen"));
+	AnimationMap_.emplace(ChosenAnim);
+	
+	LoadAnimation(AnimationState::Chosen);
 
 	this->Texture_.loadFromFile(TexturePath);
 	this->Sprite.setTexture(this->Texture_);
-	this->Sprite.setTextureRect(StartRect_);
 
-	EndRect_=StartRect_.left+(StartRect_.width+SpriteSpacing_)*AnimationFrames_;
 
 	GraphicFile.close();
 }
@@ -32,26 +26,43 @@ GraphicHero::GraphicHero(std::ifstream& GraphicFile)
 {
 	const auto TexturePath=TagXmlParser::FindTag<std::string>(GraphicFile,"TexturePath");
 
-	AnimationDuration_=TagXmlParser::FindTag<double>(GraphicFile,"AnimationDuration");
-	AnimationFrames_=TagXmlParser::FindTag<int>(GraphicFile,"AnimationFrames");
-	SpriteSpacing_=TagXmlParser::FindTag<int>(GraphicFile,"SpriteSpacing");
+	std::pair<AnimationState,std::string> IdleAnim(AnimationState::Idle,TagXmlParser::FindTag<std::string>(GraphicFile,"Idle"));
+	AnimationMap_.emplace(IdleAnim);
 
-	const auto Left=TagXmlParser::FindTag<int>(GraphicFile,"Left");
-	const auto Top=TagXmlParser::FindTag<int>(GraphicFile,"Top");
-	const auto Width=TagXmlParser::FindTag<int>(GraphicFile,"Width");
-	const auto Height=TagXmlParser::FindTag<int>(GraphicFile,"Height");
+	std::pair<AnimationState,std::string> ChosenAnim(AnimationState::Chosen,TagXmlParser::FindTag<std::string>(GraphicFile,"Chosen"));
+	AnimationMap_.emplace(ChosenAnim);
 
-	StartRect_=sf::IntRect(Left, Top, Width, Height);
+	LoadAnimation(AnimationState::Chosen);
 
 	this->Texture_.loadFromFile(TexturePath);
 	this->Sprite.setTexture(this->Texture_);
-	this->Sprite.setTextureRect(StartRect_);
-
-	EndRect_=StartRect_.left+(StartRect_.width+SpriteSpacing_)*AnimationFrames_;
 
 	GraphicFile.close();
 }
 
+
+void GraphicHero::LoadAnimation(const AnimationState Animation)
+{
+	std::ifstream AnimationFile;
+	AnimationFile.open(AnimationMap_[Animation]);
+
+	AnimationDuration_=TagXmlParser::FindTag<double>(AnimationFile,"AnimationDuration");
+	AnimationFrames_=TagXmlParser::FindTag<int>(AnimationFile,"AnimationFrames");
+	SpriteSpacing_=TagXmlParser::FindTag<int>(AnimationFile,"SpriteSpacing");
+
+	const auto Left=TagXmlParser::FindTag<int>(AnimationFile,"Left");
+	const auto Top=TagXmlParser::FindTag<int>(AnimationFile,"Top");
+	const auto Width=TagXmlParser::FindTag<int>(AnimationFile,"Width");
+	const auto Height=TagXmlParser::FindTag<int>(AnimationFile,"Height");
+
+	SpriteRect_=sf::IntRect(Left, Top, Width, Height);
+
+	this->Sprite.setTextureRect(SpriteRect_);
+
+	EndRect_=SpriteRect_.left+(SpriteRect_.width+SpriteSpacing_)*AnimationFrames_;
+
+	AnimationFile.close();
+}
 
 void GraphicHero::Update()
 {
@@ -66,7 +77,7 @@ void GraphicHero::Update()
 			                     Sprite.getTextureRect().height);
 		if (NextRect.left>=EndRect_)
 		{
-			Sprite.setTextureRect(StartRect_);
+			Sprite.setTextureRect(SpriteRect_);
 
 		}
 		else
