@@ -18,17 +18,18 @@ public:
 	explicit GraphicHero(const std::string& FilePath);
 	explicit GraphicHero(std::ifstream& GraphicFile);
 
-	std::shared_ptr<class Hero> Game;
 
 	void LoadAnimation(AnimationState Animation);
 	void Update();//NOTE(Nick):Google about sprite animation
 
 	~GraphicHero()=default;
 
+
 	sf::Sprite Sprite;
 private:
-	std::map<AnimationState,std::string> AnimationMap_;
+	AnimationState CurrentAnimation_;
 
+	std::map<AnimationState,std::string> AnimationMap_;
 	//AutoIncrementer<sf::Sprite> AnimationIncrement_;
 	double OldTime_=0;
 	double NewTime_=0;

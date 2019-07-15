@@ -13,7 +13,7 @@ GraphicHero::GraphicHero(const std::string& FilePath)
 	std::pair<AnimationState,std::string> ChosenAnim(AnimationState::Chosen,TagXmlParser::FindTag<std::string>(GraphicFile,"Chosen"));
 	AnimationMap_.emplace(ChosenAnim);
 	
-	LoadAnimation(AnimationState::Chosen);
+	LoadAnimation(AnimationState::Idle);
 
 	this->Texture_.loadFromFile(TexturePath);
 	this->Sprite.setTexture(this->Texture_);
@@ -32,7 +32,7 @@ GraphicHero::GraphicHero(std::ifstream& GraphicFile)
 	std::pair<AnimationState,std::string> ChosenAnim(AnimationState::Chosen,TagXmlParser::FindTag<std::string>(GraphicFile,"Chosen"));
 	AnimationMap_.emplace(ChosenAnim);
 
-	LoadAnimation(AnimationState::Chosen);
+	LoadAnimation(AnimationState::Idle);
 
 	this->Texture_.loadFromFile(TexturePath);
 	this->Sprite.setTexture(this->Texture_);
@@ -60,6 +60,8 @@ void GraphicHero::LoadAnimation(const AnimationState Animation)
 	this->Sprite.setTextureRect(SpriteRect_);
 
 	EndRect_=SpriteRect_.left+(SpriteRect_.width+SpriteSpacing_)*AnimationFrames_;
+
+	CurrentAnimation_=Animation;
 
 	AnimationFile.close();
 }

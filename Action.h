@@ -2,6 +2,7 @@
 
 #include "Hero.h"
 
+class Hero;
 
 class Action
 {

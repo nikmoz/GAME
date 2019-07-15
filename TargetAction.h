@@ -1,4 +1,5 @@
 #pragma once
+
 #include "Action.h"
 #include "Game.h"
 #include "InputHandler.h"
@@ -6,7 +7,11 @@
 #include <vector>
 #include <iostream>
 
-using TargetPtr = std::shared_ptr<Hero>;
+namespace TargetDef
+{
+	using TargetPtr = std::shared_ptr<Hero>;	
+}
+
 
 class TargetAction : public Action, public Observer
 {
@@ -21,7 +26,7 @@ private:
 	virtual void InitTargetAction(Hero& Actor);
 	virtual int ChooseTarget(sf::Keyboard::Key Key);
 
-	std::vector<TargetPtr> PossibleTargets_ = {};
+	std::vector<TargetDef::TargetPtr> PossibleTargets_ = {};
 
 	std::unique_ptr<InputHandler> TargetInputHandler_ = std::make_unique<InputHandler>();
 };

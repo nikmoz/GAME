@@ -4,8 +4,13 @@
 #include "Observer.h"
 #include "InputHandler.h"
 #include <vector>
-#include <fstream>
-#include "TagXmlParser.h"
+#include <queue>
+#include "TagXMLParser.h"
+
+namespace BattleSceneDef
+{
+	using ActionPtr=std::shared_ptr<class Action>;
+}
 
 class BattleScene:public Scene,public Observer
 {
@@ -23,7 +28,7 @@ public:
 	void Unload() override {};
 	void Redraw() override;
 
-	void AddCharacter(TargetPtr&& Character) noexcept;
+	void AddCharacter(SceneDef::TargetPtr&& Character) noexcept;
 
 	
 private:
@@ -33,10 +38,11 @@ private:
 
 	std::unique_ptr<class InputHandler> TurnInputHandler_;
 	
-	std::vector<ActionPtr> Actions_;
-	ActionPtr ChooseAction(sf::Keyboard::Key Key);
+	std::vector< BattleSceneDef::ActionPtr> Actions_;
+	BattleSceneDef::ActionPtr ChooseAction(sf::Keyboard::Key Key);
+
 	bool CheckActionQueue();
-	
+	std::queue<std::pair< BattleSceneDef::ActionPtr,SceneDef::TargetPtr>> ActionQueue_;
 };
 
 

@@ -1,19 +1,22 @@
 #include "BattleScene.h"
 
 #include "Action.h"
-#include "NameAction.h"
-#include "SideAction.h"
-#include "TargetAction.h"
+#include <iostream>
+
+#include "NextAction.h"
+#include "PrevAction.h"
+#include "ExecuteAction.h"
 
 using std::move;
 
 BattleScene::BattleScene()
 {
+
 	TurnInputHandler_ = std::make_unique<class InputHandler>();
 	TurnInputHandler_->Subscribe(std::shared_ptr<class Observer>(this));
 }
 
-void BattleScene::AddCharacter(TargetPtr&& Character) noexcept
+void BattleScene::AddCharacter(SceneDef::TargetPtr&& Character) noexcept
 {
 	Characters.push_back(Character);
 	Render_->AddCharacter(Character->Graphic);
@@ -79,38 +82,23 @@ void BattleScene::AddCharacter(TargetPtr&& Character) noexcept
 	Root 3: Separated Scene and render means InputHandler code duplication(Solved)
 */
 
-ActionPtr BattleScene::ChooseAction(const sf::Keyboard::Key Key)//TODO(Nick):Read about Factory method
+BattleSceneDef::ActionPtr BattleScene::ChooseAction(const sf::Keyboard::Key Key)//TODO(Nick):Read about Factory method
 {
-	static auto I(0U);
+	//static auto I(0U);
 
 	if (Key==sf::Keyboard::Down)
 	{
-		if (I < Actions_.size() - 1)
-		{
-			I++;
-
-			std::cout << "Current Action:" << I<< std::endl;
-		}
-		return nullptr;
+		return BattleSceneDef::ActionPtr(new NextAction);
 	}
 
 	if (Key ==sf::Keyboard::Up)
 	{
-		if (I > 0)
-		{
-			I--;
-
-			std::cout << "Current Action:" << I << std::endl;
-		}
-		return nullptr;
+		return BattleSceneDef::ActionPtr(new PrevAction);
 	}
 
 	if (Key == sf::Keyboard::Enter)
 	{
-		const auto Tmp = I;
-			I = 0;
-
-			return Actions_.at(Tmp);
+		return BattleSceneDef::ActionPtr(new ExecuteAction);
 	}
 
 	return nullptr;
@@ -124,33 +112,37 @@ void BattleScene::Update(const sf::Keyboard::Key Key)
 		return;
 	}
 
-	std::cout <<"Current Char:"<< Characters.at(CurrentChar_)->Name << std::endl;
-
 	TurnAction->Execute(*Characters.at(CurrentChar_));
+
 	if (!TurnAction->IsResolved)
 	{
 		auto Char = Characters.at(CurrentChar_);
 		ActionQueue_.push(std::make_pair(TurnAction, Char));
 	}
 
+	Characters.at(CurrentChar_)->Graphic->LoadAnimation(AnimationState::Idle);
+
 	CurrentChar_++;
 	if (CurrentChar_ >= Characters.size())
 	{
 		CurrentChar_ = 0;
 	}
+	Characters.at(CurrentChar_)->Graphic->LoadAnimation(AnimationState::Chosen);
 };
 
 void BattleScene::UpdateScene()
 {
 	if (CheckActionQueue())
 	{
+		
+
 		TurnInputHandler_->HandleInput();
 	}
 };
 
 void BattleScene::Redraw()
 {
-	
+
 	Render_->RenderScene();
 
 	for (auto& Char:Characters)
@@ -166,7 +158,6 @@ void BattleScene::Load(const std::string& FileName)//TODO(Nick): Figure out norm
 
 	Render_ = std::make_unique<class Render>(400,400);
 
-	using  namespace  std::chrono_literals;
 
 	auto Characters=TagXmlParser::FindAllTags<std::string>(SceneFile,"Hero");
 	for (const auto& Char:Characters)
@@ -176,10 +167,7 @@ void BattleScene::Load(const std::string& FileName)//TODO(Nick): Figure out norm
 
 	SetupCharactersPosition();
 
-
-	this->Actions_.push_back(ActionPtr(new NameAction));
-	this->Actions_.push_back(ActionPtr(new SideAction));
-	this->Actions_.push_back(ActionPtr(new TargetAction));
+	this->Characters.at(CurrentChar_)->Graphic->LoadAnimation(AnimationState::Chosen);
 
 	SceneFile.close();
 }
@@ -212,13 +200,13 @@ void BattleScene::SetupCharactersPosition() noexcept//NOTE(Nick):still not sure 
 
 	for (auto& Char : Characters)//NOTE(Nick): If I could guarantee that Characters list is order by side, I could move this to Render class
 	{
-		if (Char->Side == HeroDefinitions::Hero) {
+		if (Char->Side == HeroDef::Hero) {
 			HeroCount++;
 			Char->Graphic->Sprite.setPosition(static_cast<float>(Render_->RenderWidth) / 2 - static_cast<float>(SpriteSpace * HeroCount),
 			                                  static_cast<float>(Render_->RenderHeight) / 2);
 
 		}
-		else if (Char->Side == HeroDefinitions::Enemy) {
+		else if (Char->Side == HeroDef::Enemy) {
 			EnemyCount++;
 			Char->Graphic->Sprite.setPosition(static_cast<float>(Render_->RenderWidth) / 2 + static_cast<float>(SpriteSpace * EnemyCount),
 			                                  static_cast<float>(Render_->RenderHeight) / 2);
