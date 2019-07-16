@@ -1,12 +1,16 @@
 #include "InputHandler.h"
 
+std::map<sf::Keyboard::Key,KeyState> InputHandler::Key_={};
+
 InputHandler::InputHandler()
 {
-	for (auto I=0; I<sf::Keyboard::KeyCount;I++)
+	if (Key_.empty())
 	{
-		Key_[static_cast<sf::Keyboard::Key>(I)]=KeyState::Released;
+		for (auto I=0; I<sf::Keyboard::KeyCount;I++)
+		{
+			Key_[static_cast<sf::Keyboard::Key>(I)]=KeyState::Released;
+		}
 	}
-
 
 }
 

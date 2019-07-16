@@ -44,7 +44,7 @@ void BattleScene::AddCharacter(SceneDef::TargetPtr&& Character) noexcept
 	Tasks being checked
 
 	Root 1: In current state scene should know about all actions for each actor
-		Solution 1:
+		Solution 1:(Hard to implement now, but looks nice)
 			Create set of actions {NextAction,PrevAction,ExecuteAction} and store actions in HeroClass
 			Argument:
 				This will keep Scene from knowing all actions, and leads to only 1 actions loading, on Character init
@@ -57,7 +57,7 @@ void BattleScene::AddCharacter(SceneDef::TargetPtr&& Character) noexcept
 				No copies of standard actions in standard encounters
 				This will move all Action resolving staff into Hero class, and easy to implement, 
 				but I'l be stuck with same Attack,Defend, Skill (and future Party) pattern
-		Solution 3:
+		Solution 3:(Done)(Easy, but messy code)
 			Keep it that way, and think of format, that can save all information needed
 			Argument:
 				Headers aren't this kind of problem you should be thinking of
@@ -84,21 +84,31 @@ void BattleScene::AddCharacter(SceneDef::TargetPtr&& Character) noexcept
 
 BattleSceneDef::ActionPtr BattleScene::ChooseAction(const sf::Keyboard::Key Key)//TODO(Nick):Read about Factory method
 {
-	//static auto I(0U);
+	static auto I(0U);
 
 	if (Key==sf::Keyboard::Down)
 	{
-		return BattleSceneDef::ActionPtr(new NextAction);
+		if(I<Actions_.size()-1)
+		{
+			I++;
+		}
+		return nullptr;
 	}
 
 	if (Key ==sf::Keyboard::Up)
 	{
-		return BattleSceneDef::ActionPtr(new PrevAction);
+		if(I>0)
+		{
+			I--;
+		}
+		return nullptr;
 	}
 
 	if (Key == sf::Keyboard::Enter)
 	{
-		return BattleSceneDef::ActionPtr(new ExecuteAction);
+		const auto Tmp=I;
+		I=0;
+		return Actions_.at(Tmp);
 	}
 
 	return nullptr;
@@ -127,6 +137,8 @@ void BattleScene::Update(const sf::Keyboard::Key Key)
 	{
 		CurrentChar_ = 0;
 	}
+
+	Actions_=Characters.at(CurrentChar_)->Actions;
 	Characters.at(CurrentChar_)->Graphic->LoadAnimation(AnimationState::Chosen);
 };
 
@@ -134,8 +146,6 @@ void BattleScene::UpdateScene()
 {
 	if (CheckActionQueue())
 	{
-		
-
 		TurnInputHandler_->HandleInput();
 	}
 };
@@ -159,14 +169,15 @@ void BattleScene::Load(const std::string& FileName)//TODO(Nick): Figure out norm
 	Render_ = std::make_unique<class Render>(400,400);
 
 
-	auto Characters=TagXmlParser::FindAllTags<std::string>(SceneFile,"Hero");
-	for (const auto& Char:Characters)
+	auto Heroes=TagXmlParser::FindAllTags<std::string>(SceneFile,"Hero");
+	for (const auto& Char:Heroes)
 	{
 		AddCharacter(std::make_shared<Hero>(Char));
 	}
 
 	SetupCharactersPosition();
 
+	Actions_=Characters.at(CurrentChar_)->Actions;
 	this->Characters.at(CurrentChar_)->Graphic->LoadAnimation(AnimationState::Chosen);
 
 	SceneFile.close();

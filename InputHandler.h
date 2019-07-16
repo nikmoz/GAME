@@ -23,7 +23,7 @@ public:
 	void HandleInput();
 	std::vector<Subscriber> Subs;
 private:
-	std::map<sf::Keyboard::Key,KeyState> Key_;
+	static std::map<sf::Keyboard::Key,KeyState> Key_;
 	void Notify(sf::Keyboard::Key Key);
 };
 

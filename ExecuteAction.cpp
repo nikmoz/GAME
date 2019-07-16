@@ -3,4 +3,5 @@
 void ExecuteAction::Execute(Hero& Actor)
 {
 	Actor.Actions[Actor.CurrentAction]->Execute(Actor);
+	Actor.CurrentAction=0;
 }
