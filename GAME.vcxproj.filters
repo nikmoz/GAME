@@ -70,6 +70,18 @@
     <ClCompile Include="Hero.cpp">
       <Filter>Hero</Filter>
     </ClCompile>
+    <ClCompile Include="NextAction.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="PrevAction.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="ExecuteAction.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="TargetScene.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Action.h">
@@ -109,6 +121,18 @@
     </ClInclude>
     <ClInclude Include="Hero.h">
       <Filter>Hero</Filter>
+    </ClInclude>
+    <ClInclude Include="NextAction.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="PrevAction.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="ExecuteAction.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="TargetScene.h">
+      <Filter>Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

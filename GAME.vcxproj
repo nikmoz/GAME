@@ -161,6 +161,7 @@
     <ClCompile Include="StateMachine.cpp" />
     <ClCompile Include="StateNode.cpp" />
     <ClCompile Include="TargetAction.cpp" />
+    <ClCompile Include="TargetScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Action.h" />
@@ -179,6 +180,7 @@
     <ClInclude Include="StateNode.h" />
     <ClInclude Include="TagXMLParser.h" />
     <ClInclude Include="TargetAction.h" />
+    <ClInclude Include="TargetScene.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\img\sprite_base_addon_2012_12_14.png" />

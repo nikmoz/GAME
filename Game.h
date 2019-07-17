@@ -5,6 +5,7 @@
 class Game
 {
 public:
+
 	static void StartGame();
 	static void InitScene();
 	static std::shared_ptr<class Scene> CurrentScene;

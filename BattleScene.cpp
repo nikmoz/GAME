@@ -3,17 +3,12 @@
 #include "Action.h"
 #include <iostream>
 
-#include "NextAction.h"
-#include "PrevAction.h"
-#include "ExecuteAction.h"
-
-using std::move;
 
 BattleScene::BattleScene()
 {
 
 	TurnInputHandler_ = std::make_unique<class InputHandler>();
-	TurnInputHandler_->Subscribe(std::shared_ptr<class Observer>(this));
+	TurnInputHandler_->Subscribe(HandlerDef::Subscriber(this));
 }
 
 void BattleScene::AddCharacter(SceneDef::TargetPtr&& Character) noexcept
@@ -44,7 +39,7 @@ void BattleScene::AddCharacter(SceneDef::TargetPtr&& Character) noexcept
 	Tasks being checked
 
 	Root 1: In current state scene should know about all actions for each actor
-		Solution 1:(Hard to implement now, but looks nice)
+		Solution 1:
 			Create set of actions {NextAction,PrevAction,ExecuteAction} and store actions in HeroClass
 			Argument:
 				This will keep Scene from knowing all actions, and leads to only 1 actions loading, on Character init
@@ -57,7 +52,7 @@ void BattleScene::AddCharacter(SceneDef::TargetPtr&& Character) noexcept
 				No copies of standard actions in standard encounters
 				This will move all Action resolving staff into Hero class, and easy to implement, 
 				but I'l be stuck with same Attack,Defend, Skill (and future Party) pattern
-		Solution 3:(Done)(Easy, but messy code)~~
+		Solution 3:
 			Keep it that way, and think of format, that can save all information needed
 			Argument:
 				Headers aren't this kind of problem you should be thinking of
@@ -84,31 +79,21 @@ void BattleScene::AddCharacter(SceneDef::TargetPtr&& Character) noexcept
 
 BattleSceneDef::ActionPtr BattleScene::ChooseAction(const sf::Keyboard::Key Key)//TODO(Nick):Read about Factory method
 {
-	static auto I(0U);
+	//static auto I(0U);
 
 	if (Key==sf::Keyboard::Down)
 	{
-		if(I<Actions_.size()-1)
-		{
-			I++;
-		}
-		return nullptr;
+		return NextAction_;
 	}
 
 	if (Key ==sf::Keyboard::Up)
 	{
-		if(I>0)
-		{
-			I--;
-		}
-		return nullptr;
+		return PrevAction_;
 	}
 
 	if (Key == sf::Keyboard::Enter)
 	{
-		const auto Tmp=I;
-		I=0;
-		return Actions_.at(Tmp);
+		return ExecuteAction_;
 	}
 
 	return nullptr;
@@ -116,6 +101,7 @@ BattleSceneDef::ActionPtr BattleScene::ChooseAction(const sf::Keyboard::Key Key)
 
 void BattleScene::Update(const sf::Keyboard::Key Key)
 {
+
 	auto TurnAction = ChooseAction(Key);
 
 	if (TurnAction == nullptr) { 
@@ -124,34 +110,26 @@ void BattleScene::Update(const sf::Keyboard::Key Key)
 
 	TurnAction->Execute(*Characters.at(CurrentChar_));
 
-	if (!TurnAction->IsResolved)
+	if (TurnAction==ExecuteAction_)
 	{
-		auto Char = Characters.at(CurrentChar_);
-		ActionQueue_.push(std::make_pair(TurnAction, Char));
+		Characters.at(CurrentChar_)->Graphic->LoadAnimation(AnimationState::Idle);
+		CurrentChar_++;
+		if (CurrentChar_ >= Characters.size())
+		{
+			CurrentChar_ = 0;
+		}
+
 	}
-
-	Characters.at(CurrentChar_)->Graphic->LoadAnimation(AnimationState::Idle);
-
-	CurrentChar_++;
-	if (CurrentChar_ >= Characters.size())
-	{
-		CurrentChar_ = 0;
-	}
-
-	Actions_=Characters.at(CurrentChar_)->Actions;
-	Characters.at(CurrentChar_)->Graphic->LoadAnimation(AnimationState::Chosen);
 };
 
 void BattleScene::UpdateScene()
 {
-	if (CheckActionQueue())
-	{
-		TurnInputHandler_->HandleInput();
-	}
+	TurnInputHandler_->HandleInput();
 };
 
 void BattleScene::Redraw()
 {
+	Characters.at(CurrentChar_)->Graphic->LoadAnimation(AnimationState::Chosen);
 
 	Render_->RenderScene();
 
@@ -169,39 +147,20 @@ void BattleScene::Load(const std::string& FileName)//TODO(Nick): Figure out norm
 	Render_ = std::make_unique<class Render>(400,400);
 
 
-	auto Heroes=TagXmlParser::FindAllTags<std::string>(SceneFile,"Hero");
-	for (const auto& Char:Heroes)
+	auto Characters=TagXmlParser::FindAllTags<std::string>(SceneFile,"Hero");
+	for (const auto& Char:Characters)
 	{
 		AddCharacter(std::make_shared<Hero>(Char));
 	}
 
 	SetupCharactersPosition();
 
-	Actions_=Characters.at(CurrentChar_)->Actions;
 	this->Characters.at(CurrentChar_)->Graphic->LoadAnimation(AnimationState::Chosen);
+
 
 	SceneFile.close();
 }
 
-bool BattleScene::CheckActionQueue()//NOTE(Nick): Cause some actions may have countdown, i probably should switch to vector instead of queue
-{
-	if (ActionQueue_.empty())
-	{
-		return true;
-	}
-
-	auto CurrentAction = ActionQueue_.front().first;
-	auto CurrentHero = ActionQueue_.front().second;
-
-	CurrentAction->Execute(*CurrentHero);
-
-	if (CurrentAction->IsResolved)
-	{
-		ActionQueue_.pop();
-	}
-
-	return false;
-};
 
 void BattleScene::SetupCharactersPosition() noexcept//NOTE(Nick):still not sure if this belongs here
 {

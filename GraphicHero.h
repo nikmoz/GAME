@@ -7,6 +7,7 @@
 
 enum class AnimationState
 {
+	None,
 	Idle,
 	Chosen
 };
@@ -27,7 +28,7 @@ public:
 
 	sf::Sprite Sprite;
 private:
-	AnimationState CurrentAnimation_;
+	AnimationState CurrentAnimation_=AnimationState::None;
 
 	std::map<AnimationState,std::string> AnimationMap_;
 	//AutoIncrementer<sf::Sprite> AnimationIncrement_;

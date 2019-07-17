@@ -4,7 +4,11 @@
 #include "Observer.h"
 #include "InputHandler.h"
 #include <vector>
-#include <queue>
+
+#include "NextAction.h"
+#include "PrevAction.h"
+#include "ExecuteAction.h"
+
 #include "TagXMLParser.h"
 
 namespace BattleSceneDef
@@ -37,12 +41,13 @@ private:
 	void SetupCharactersPosition() noexcept;
 
 	std::unique_ptr<class InputHandler> TurnInputHandler_;
-	
-	std::vector< BattleSceneDef::ActionPtr> Actions_;
+
+	BattleSceneDef::ActionPtr NextAction_=BattleSceneDef::ActionPtr(new NextAction);
+	BattleSceneDef::ActionPtr PrevAction_=BattleSceneDef::ActionPtr(new PrevAction);
+	BattleSceneDef::ActionPtr ExecuteAction_=BattleSceneDef::ActionPtr(new ExecuteAction);
+
 	BattleSceneDef::ActionPtr ChooseAction(sf::Keyboard::Key Key);
 
-	bool CheckActionQueue();
-	std::queue<std::pair< BattleSceneDef::ActionPtr,SceneDef::TargetPtr>> ActionQueue_;
 };
 
 

@@ -2,6 +2,7 @@
 
 #include "BattleScene.h" //NOTE(Nick): Stays here before I can make state machine for SceneChanging
 
+#include <iostream>
 
 using std::shared_ptr;
 

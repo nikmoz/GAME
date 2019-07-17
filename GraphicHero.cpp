@@ -43,27 +43,30 @@ GraphicHero::GraphicHero(std::ifstream& GraphicFile)
 
 void GraphicHero::LoadAnimation(const AnimationState Animation)
 {
-	std::ifstream AnimationFile;
-	AnimationFile.open(AnimationMap_[Animation]);
+	if (CurrentAnimation_!=Animation)
+	{
+		std::ifstream AnimationFile;
+		AnimationFile.open(AnimationMap_[Animation]);
 
-	AnimationDuration_=TagXmlParser::FindTag<double>(AnimationFile,"AnimationDuration");
-	AnimationFrames_=TagXmlParser::FindTag<int>(AnimationFile,"AnimationFrames");
-	SpriteSpacing_=TagXmlParser::FindTag<int>(AnimationFile,"SpriteSpacing");
+		AnimationDuration_ = TagXmlParser::FindTag<double>(AnimationFile, "AnimationDuration");
+		AnimationFrames_ = TagXmlParser::FindTag<int>(AnimationFile, "AnimationFrames");
+		SpriteSpacing_ = TagXmlParser::FindTag<int>(AnimationFile, "SpriteSpacing");
 
-	const auto Left=TagXmlParser::FindTag<int>(AnimationFile,"Left");
-	const auto Top=TagXmlParser::FindTag<int>(AnimationFile,"Top");
-	const auto Width=TagXmlParser::FindTag<int>(AnimationFile,"Width");
-	const auto Height=TagXmlParser::FindTag<int>(AnimationFile,"Height");
+		const auto Left = TagXmlParser::FindTag<int>(AnimationFile, "Left");
+		const auto Top = TagXmlParser::FindTag<int>(AnimationFile, "Top");
+		const auto Width = TagXmlParser::FindTag<int>(AnimationFile, "Width");
+		const auto Height = TagXmlParser::FindTag<int>(AnimationFile, "Height");
 
-	SpriteRect_=sf::IntRect(Left, Top, Width, Height);
+		SpriteRect_ = sf::IntRect(Left, Top, Width, Height);
 
-	this->Sprite.setTextureRect(SpriteRect_);
+		this->Sprite.setTextureRect(SpriteRect_);
 
-	EndRect_=SpriteRect_.left+(SpriteRect_.width+SpriteSpacing_)*AnimationFrames_;
+		EndRect_ = SpriteRect_.left + (SpriteRect_.width + SpriteSpacing_) * AnimationFrames_;
 
-	CurrentAnimation_=Animation;
+		CurrentAnimation_ = Animation;
 
-	AnimationFile.close();
+		AnimationFile.close();
+	}
 }
 
 void GraphicHero::Update()

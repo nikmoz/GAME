@@ -8,7 +8,7 @@ void SideAction::Execute(Hero& Actor) {
 	{
 		std::cout << "Enemy" << std::endl;
 	}
-	IsResolved = true;
+
 }
 
 
