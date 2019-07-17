@@ -40,7 +40,7 @@ private:
 
 	void SetupCharactersPosition() noexcept;
 
-	std::unique_ptr<class InputHandler> TurnInputHandler_;
+	std::shared_ptr<class InputHandler> TurnInputHandler_;
 
 	BattleSceneDef::ActionPtr NextAction_=BattleSceneDef::ActionPtr(new NextAction);
 	BattleSceneDef::ActionPtr PrevAction_=BattleSceneDef::ActionPtr(new PrevAction);

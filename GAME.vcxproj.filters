@@ -1,68 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="Actions">
-      <UniqueIdentifier>{138eff8e-0bc7-47bb-b98d-09f4d939aa36}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scenes">
-      <UniqueIdentifier>{c95661db-7104-4601-a077-2fb51eb0ce11}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="XML-parser">
-      <UniqueIdentifier>{af39235a-ef73-4d04-ba80-578582f038db}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="StateMachine">
-      <UniqueIdentifier>{5b0ef17b-34d7-457f-95e3-b2c9f13d7e67}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource Files\Sprites">
-      <UniqueIdentifier>{289b27ac-4df5-4ce6-8fbb-ff8f10f1e48c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource Files\Heroes">
-      <UniqueIdentifier>{78a5328f-c300-4929-b099-e615b99e2196}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource Files\Animations">
-      <UniqueIdentifier>{defe1621-2475-426f-89a9-f2619536cbe1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource Files\Scenes">
-      <UniqueIdentifier>{6858d5cc-170e-4b2a-9d53-ccff45e4a3cc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Hero">
-      <UniqueIdentifier>{1663a47b-dadc-4593-890e-2b28ffe88a37}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="SideAction.cpp">
-      <Filter>Actions</Filter>
-    </ClCompile>
-    <ClCompile Include="NameAction.cpp">
-      <Filter>Actions</Filter>
-    </ClCompile>
-    <ClCompile Include="TargetAction.cpp">
-      <Filter>Actions</Filter>
-    </ClCompile>
-    <ClCompile Include="BattleScene.cpp">
-      <Filter>Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene.cpp">
-      <Filter>Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="Action.cpp">
-      <Filter>Actions</Filter>
-    </ClCompile>
-    <ClCompile Include="AutoIncrementer.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Observer.cpp" />
     <ClCompile Include="Render.cpp" />
-    <ClCompile Include="StateMachine.cpp">
-      <Filter>StateMachine</Filter>
+    <ClCompile Include="Action.cpp">
+      <Filter>Actions</Filter>
     </ClCompile>
-    <ClCompile Include="StateNode.cpp">
-      <Filter>StateMachine</Filter>
+    <ClCompile Include="BattleScene.cpp">
+      <Filter>Scenes</Filter>
     </ClCompile>
     <ClCompile Include="GraphicHero.cpp">
       <Filter>Hero</Filter>
@@ -70,51 +18,50 @@
     <ClCompile Include="Hero.cpp">
       <Filter>Hero</Filter>
     </ClCompile>
+    <ClCompile Include="NameAction.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="SideAction.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="TargetScene.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="TargetAction.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="AutoIncrementer.cpp">
+      <Filter>Wheels</Filter>
+    </ClCompile>
+    <ClCompile Include="StateMachine.cpp">
+      <Filter>Wheels\StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="StateNode.cpp">
+      <Filter>Wheels\StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="ExecuteAction.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
     <ClCompile Include="NextAction.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
     <ClCompile Include="PrevAction.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
-    <ClCompile Include="ExecuteAction.cpp">
-      <Filter>Actions</Filter>
-    </ClCompile>
-    <ClCompile Include="TargetScene.cpp">
-      <Filter>Scenes</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="InputHandler.h" />
+    <ClInclude Include="Observer.h" />
+    <ClInclude Include="Render.h" />
     <ClInclude Include="Action.h">
-      <Filter>Actions</Filter>
-    </ClInclude>
-    <ClInclude Include="NameAction.h">
-      <Filter>Actions</Filter>
-    </ClInclude>
-    <ClInclude Include="SideAction.h">
-      <Filter>Actions</Filter>
-    </ClInclude>
-    <ClInclude Include="TargetAction.h">
       <Filter>Actions</Filter>
     </ClInclude>
     <ClInclude Include="BattleScene.h">
       <Filter>Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene.h">
-      <Filter>Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="TagXMLParser.h">
-      <Filter>XML-parser</Filter>
-    </ClInclude>
-    <ClInclude Include="Render.h" />
-    <ClInclude Include="AutoIncrementer.h" />
-    <ClInclude Include="Game.h" />
-    <ClInclude Include="InputHandler.h" />
-    <ClInclude Include="Observer.h" />
-    <ClInclude Include="StateMachine.h">
-      <Filter>StateMachine</Filter>
-    </ClInclude>
-    <ClInclude Include="StateNode.h">
-      <Filter>StateMachine</Filter>
     </ClInclude>
     <ClInclude Include="GraphicHero.h">
       <Filter>Hero</Filter>
@@ -122,44 +69,91 @@
     <ClInclude Include="Hero.h">
       <Filter>Hero</Filter>
     </ClInclude>
+    <ClInclude Include="NameAction.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="SideAction.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="TargetScene.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="TargetAction.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="AutoIncrementer.h">
+      <Filter>Wheels</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine.h">
+      <Filter>Wheels\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="StateNode.h">
+      <Filter>Wheels\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="TagXMLParser.h">
+      <Filter>Wheels</Filter>
+    </ClInclude>
+    <ClInclude Include="ExecuteAction.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
     <ClInclude Include="NextAction.h">
       <Filter>Actions</Filter>
     </ClInclude>
     <ClInclude Include="PrevAction.h">
       <Filter>Actions</Filter>
     </ClInclude>
-    <ClInclude Include="ExecuteAction.h">
-      <Filter>Actions</Filter>
-    </ClInclude>
-    <ClInclude Include="TargetScene.h">
-      <Filter>Scenes</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="res\xml\Arthas.xml">
-      <Filter>Resource Files\Heroes</Filter>
-    </Xml>
-    <Xml Include="res\xml\Uther.xml">
-      <Filter>Resource Files\Heroes</Filter>
-    </Xml>
-    <Xml Include="res\xml\Scene.xml">
-      <Filter>Resource Files\Scenes</Filter>
-    </Xml>
-    <Xml Include="res\xml\Idle.xml">
-      <Filter>Resource Files\Animations</Filter>
+      <Filter>res\Xml</Filter>
     </Xml>
     <Xml Include="res\xml\Chosen.xml">
-      <Filter>Resource Files\Animations</Filter>
+      <Filter>res\Xml</Filter>
+    </Xml>
+    <Xml Include="res\xml\Idle.xml">
+      <Filter>res\Xml</Filter>
+    </Xml>
+    <Xml Include="res\xml\Scene.xml">
+      <Filter>res\Xml</Filter>
+    </Xml>
+    <Xml Include="res\xml\Uther.xml">
+      <Filter>res\Xml</Filter>
     </Xml>
   </ItemGroup>
   <ItemGroup>
+    <Filter Include="Scenes">
+      <UniqueIdentifier>{4da0e2b2-d60f-4a62-ba24-206a1b329b2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actions">
+      <UniqueIdentifier>{68ea5052-8670-4fb9-bec4-6a68e7b0f01f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hero">
+      <UniqueIdentifier>{406dd72d-cfbf-4e53-b4c2-d8b25907f550}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Wheels">
+      <UniqueIdentifier>{36aae6a4-b3a8-4029-a5bf-c0efd6c4357e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Wheels\StateMachine">
+      <UniqueIdentifier>{3aa71aec-bdb9-41ec-80e0-e0fca3f032c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="res">
+      <UniqueIdentifier>{78795056-97d7-47f7-9236-dd0d2f1a850b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="res\Xml">
+      <UniqueIdentifier>{79d14d1e-8449-4625-b6e6-f111f197c41b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
     <Image Include="res\img\sprite_base_addon_2012_12_14.png">
-      <Filter>Resource Files\Sprites</Filter>
+      <Filter>res</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Todo.txt">
-      <Filter>Resource Files</Filter>
+      <Filter>res</Filter>
     </Text>
   </ItemGroup>
 </Project>

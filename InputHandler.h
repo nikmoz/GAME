@@ -21,9 +21,9 @@ class InputHandler
 public:
 	InputHandler();
 
-	void Subscribe(const HandlerDef::Subscriber& Sub);
+	void Subscribe(Observer* Sub);
 	void HandleInput();
-	std::vector<HandlerDef::Subscriber> Subs={};
+	std::vector<Observer*> Subs={};
 private:
 	static std::map<sf::Keyboard::Key,KeyState> Key_;
 	void Notify(sf::Keyboard::Key Key);

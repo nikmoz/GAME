@@ -13,7 +13,8 @@ namespace SceneDef
 class Scene
 {
 public:
-	//virtual ~Scene()=default;
+
+	virtual ~Scene()=default;
 	std::vector<SceneDef::TargetPtr> Characters;
 
 	virtual void UpdateScene()=0;
@@ -22,7 +23,7 @@ public:
 	virtual void Unload()=0;
 
 protected:
-	std::unique_ptr<Render> Render_;
+	std::shared_ptr<Render> Render_;
 
 };
 

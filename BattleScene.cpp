@@ -7,8 +7,8 @@
 BattleScene::BattleScene()
 {
 
-	TurnInputHandler_ = std::make_unique<class InputHandler>();
-	TurnInputHandler_->Subscribe(HandlerDef::Subscriber(this));
+	TurnInputHandler_ = std::make_shared<class InputHandler>();
+	TurnInputHandler_->Subscribe(this);
 }
 
 void BattleScene::AddCharacter(SceneDef::TargetPtr&& Character) noexcept

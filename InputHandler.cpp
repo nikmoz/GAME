@@ -20,7 +20,7 @@ void InputHandler::Notify(const sf::Keyboard::Key Key)
 	}
 }
 
-void InputHandler::Subscribe(const HandlerDef::Subscriber& Sub)
+void InputHandler::Subscribe(Observer* Sub)
 {
 	Subs.push_back(Sub);
 }

@@ -3,8 +3,8 @@
 void TargetAction::Execute(Hero& Actor)
 {
 	ChooseTargets(Actor);
-	static auto TScene= std::make_shared<TargetScene>(PossibleTargets_);
-
+	auto TScene= std::make_shared<TargetScene>(PossibleTargets_);
+	TScene->Load("");
 }
 
 void TargetAction::ChooseTargets(Hero& Actor)
