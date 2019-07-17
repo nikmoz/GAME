@@ -21,7 +21,7 @@ Hero::Hero(const std::string& FileName)
 		Side=HeroDef::Enemy;
 	}
 
-	Graphic = std::make_unique<GraphicHero>(HeroFile);
+	Graphic = std::make_shared<GraphicHero>(HeroFile);
 
 	auto Skills=TagXmlParser::FindAllTags<std::string>(HeroFile,"Action");
 	for (const auto& Skill:Skills)//TODO(Nick):Create map for Actions

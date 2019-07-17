@@ -37,7 +37,7 @@ GraphicHero::GraphicHero(std::ifstream& GraphicFile)
 	this->Texture_.loadFromFile(TexturePath);
 	this->Sprite.setTexture(this->Texture_);
 
-	GraphicFile.close();
+	//GraphicFile.close();
 }
 
 

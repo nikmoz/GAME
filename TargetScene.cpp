@@ -56,13 +56,9 @@ void TargetScene::Load(const std::string& FileName)
 
 void TargetScene::Unload()
 {
-	static auto Next= PreviousScene_;
 
-	Game::CurrentScene=Next;
+	Game::CurrentScene=PreviousScene_;
 
-	//Next=Game::CurrentScene;
-
-	std::cout<<"Hm"<<std::endl;
 }
 
 unsigned int TargetScene::ChooseTarget(const sf::Keyboard::Key Key)
