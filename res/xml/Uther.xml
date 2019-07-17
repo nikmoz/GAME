@@ -21,4 +21,12 @@
       </Chosen>
     </Animation>
   </Graphic>
+  <Actions>
+    <Action>
+      NameAction
+    </Action>
+    <Action>
+      SideAction
+    </Action>
+  </Actions>
 </Hero>
