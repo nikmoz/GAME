@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Hero>
+  <Game>
+    <Name>
+      Arthas
+    </Name>
+    <Side>
+      Enemy
+    </Side>
+  </Game>
+  <Graphic>
+    <TexturePath>
+      res/img/sprite_base_addon_2012_12_14.png
+    </TexturePath>
+    <Animation>
+      <Idle>
+        res/xml/Idle.xml
+      </Idle>
+      <Chosen>
+        res/xml/Chosen.xml
+      </Chosen>
+    </Animation>
+  </Graphic>
+</Hero>

@@ -83,12 +83,12 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>P:\GAME\res\SFML-2.5.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)res\SFML-2.5.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SFML_DYNAMIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>P:\GAME\res\SFML-2.5.1\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)res\SFML-2.5.1\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-audio-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <NoEntryPoint>false</NoEntryPoint>
     </Link>
@@ -146,49 +146,60 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Action.cpp" />
-    <ClCompile Include="DOMParser.cpp" />
-    <ClCompile Include="ExeptionHandler.cpp" />
+    <ClCompile Include="AutoIncrementer.cpp" />
+    <ClCompile Include="ExecuteAction.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GraphicHero.cpp" />
     <ClCompile Include="Hero.cpp" />
     <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="NextAction.cpp" />
     <ClCompile Include="Observer.cpp" />
+    <ClCompile Include="PrevAction.cpp" />
     <ClCompile Include="Render.cpp" />
     <ClCompile Include="BattleScene.cpp" />
     <ClCompile Include="NameAction.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SideAction.cpp" />
-    <ClCompile Include="TagElement.cpp" />
+    <ClCompile Include="StateMachine.cpp" />
+    <ClCompile Include="StateNode.cpp" />
     <ClCompile Include="TargetAction.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include=".clang-tidy" />
+    <ClCompile Include="TargetScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Action.h" />
-    <ClInclude Include="DOMParser.h" />
-    <ClInclude Include="Element.h" />
-    <ClInclude Include="ExeptionHandler.h" />
+    <ClInclude Include="AutoIncrementer.h" />
+    <ClInclude Include="ExecuteAction.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GraphicHero.h" />
     <ClInclude Include="Hero.h" />
     <ClInclude Include="InputHandler.h" />
+    <ClInclude Include="NextAction.h" />
     <ClInclude Include="Observer.h" />
+    <ClInclude Include="PrevAction.h" />
     <ClInclude Include="Render.h" />
     <ClInclude Include="BattleScene.h" />
     <ClInclude Include="NameAction.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SideAction.h" />
-    <ClInclude Include="TagElement.h" />
+    <ClInclude Include="StateMachine.h" />
+    <ClInclude Include="StateNode.h" />
+    <ClInclude Include="TagXMLParser.h" />
     <ClInclude Include="TargetAction.h" />
+    <ClInclude Include="TargetScene.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="res\img\sorlosheet.png" />
     <Image Include="res\img\sprite_base_addon_2012_12_14.png" />
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="res\Standart.xml" />
+    <Xml Include="res\xml\Arthas.xml" />
+    <Xml Include="res\xml\Chosen.xml" />
+    <Xml Include="res\xml\Idle.xml" />
+    <Xml Include="res\xml\Scene.xml" />
+    <Xml Include="res\xml\Uther.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Todo.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

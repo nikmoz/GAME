@@ -1,34 +1,34 @@
 #include "BattleScene.h"
 
-#include "NameAction.h"
-#include "SideAction.h"
-#include "TargetAction.h"
+#include "Action.h"
+#include <iostream>
 
-using std::move;
 
 BattleScene::BattleScene()
 {
-	TurnInputHandler_ = std::make_unique<class InputHandler>();
-	TurnInputHandler_->Subscribe(std::shared_ptr<class Observer>(this));
+
+	TurnInputHandler_ = std::make_shared<class InputHandler>();
+	TurnInputHandler_->Subscribe(this);
 }
 
-void BattleScene::AddCharacter(TargetPtr&& Character) noexcept
+void BattleScene::AddCharacter(SceneDef::TargetPtr&& Character) noexcept
 {
 	Characters.push_back(Character);
 	Render_->AddCharacter(Character->Graphic);
-};
-/*TODO(Nick):Turn() 
-	Problem 1:How to change targets without passing Characters to Hero Class(tried GameClass with static, but it didn't look nice)
+}
+
+/*THEME(Nick):Turn() 
+	Problem 1:How to change targets without passing Characters to Hero Class
 	Problem 2:Attack and Defend consumes turn, while ChangeTarget doesn't
 	Problem 3:Skill system allows for multiple target types and multiple turn actions, which leads to bigger problem than problem 1
 
 	Solution 1(checking...):
-	Create Action stack and countdown param in Action(Done, but with queue)
-	Create LoadAction() that loads Action list for scene(probably move to global scene load later) (Check next ChooseAction() THEME)
-	Create ChooseAction() that returns Action(Command pattern)(Done)
-	Execute Action, which leads to finding out target and executing one of the functions in Hero(Done)
+	Create Action queue and countdown param in Action (Done)
+	Create LoadAction() that loads Action list for scene(probably move to global scene load later)
+	Create ChooseAction() that returns Action(Command pattern) (Done)
+	Execute Action, which leads to finding out target and executing one of the functions in Hero (Done)
 */
-/*TODO(Nick):ChooseAction()
+/*THEME(Nick):ChooseAction()
 	The way is see it:
 	Battle starts->
 	Some Game function loads characters->
@@ -50,7 +50,7 @@ void BattleScene::AddCharacter(TargetPtr&& Character) noexcept
 			Skill calls LoadSkills for current Hero, creating new set of actions
 			Argument:
 				No copies of standard actions in standard encounters
-				This will move all Action resolving staff into Hero class, and easy tom implement, 
+				This will move all Action resolving staff into Hero class, and easy to implement, 
 				but I'l be stuck with same Attack,Defend, Skill (and future Party) pattern
 		Solution 3:
 			Keep it that way, and think of format, that can save all information needed
@@ -75,124 +75,92 @@ void BattleScene::AddCharacter(TargetPtr&& Character) noexcept
 				Loads skills only if needed
 
 	Root 3: Separated Scene and render means InputHandler code duplication(Solved)
-		Solution 1:
-			Create static InputHandler class that notifies each sub on key input. Make Scene and Render subs.(Done)
-		Solution 2:
-			Create static InputHandler class that sends Action to each sub. Make Scene and Render subs.
 */
 
-ActionPtr BattleScene::ChooseAction(const Keyboard::Keys Key)//TODO(Nick):Read about Factory method
+BattleSceneDef::ActionPtr BattleScene::ChooseAction(const sf::Keyboard::Key Key)//TODO(Nick):Read about Factory method
 {
-	static auto I(0U);
+	//static auto I(0U);
 
-	if (Key==Keyboard::Down)
+	if (Key==sf::Keyboard::Down)
 	{
-		if (I < Actions_.size() - 1)
-		{
-			I++;
-
-			std::cout << "Current Action:" << I<< std::endl;
-		}
-		return nullptr;
+		return NextAction_;
 	}
 
-	if (Key == Keyboard::Up)
+	if (Key ==sf::Keyboard::Up)
 	{
-		if (I > 0)
-		{
-			I--;
-
-			std::cout << "Current Action:" << I << std::endl;
-		}
-		return nullptr;
+		return PrevAction_;
 	}
 
-	if (Key == Keyboard::Enter)
+	if (Key == sf::Keyboard::Enter)
 	{
-		const auto Tmp = I;
-			I = 0;
-
-			return Actions_.at(Tmp);
+		return ExecuteAction_;
 	}
 
 	return nullptr;
 };
 
-void BattleScene::Update(const Keyboard::Keys Key)
+void BattleScene::Update(const sf::Keyboard::Key Key)
 {
+
 	auto TurnAction = ChooseAction(Key);
 
 	if (TurnAction == nullptr) { 
 		return;
 	}
 
-	std::cout <<"Current Char:"<< Characters.at(CurrentChar_)->Name << std::endl;
-
 	TurnAction->Execute(*Characters.at(CurrentChar_));
-	if (!TurnAction->IsResolved)
-	{
-		auto Char = Characters.at(CurrentChar_);
-		ActionQueue_.push(std::make_pair(TurnAction, Char));
-	}
 
-	CurrentChar_++;
-	if (CurrentChar_ >= Characters.size())
+	if (TurnAction==ExecuteAction_)
 	{
-		CurrentChar_ = 0;
+		Characters.at(CurrentChar_)->Graphic->LoadAnimation(AnimationState::Idle);
+		CurrentChar_++;
+		if (CurrentChar_ >= Characters.size())
+		{
+			CurrentChar_ = 0;
+		}
+
 	}
 };
 
 void BattleScene::UpdateScene()
 {
-	if (CheckActionQueue())
-	{
-		TurnInputHandler_->HandleInput();
-	}
+	TurnInputHandler_->HandleInput();
 };
 
 void BattleScene::Redraw()
 {
+	Characters.at(CurrentChar_)->Graphic->LoadAnimation(AnimationState::Chosen);
+
 	Render_->RenderScene();
+
+	for (auto& Char:Characters)
+	{
+		Char->Graphic->Update();
+	}
 };
 
-void BattleScene::Load()//TODO(Nick): Figure out normal loading variant
+void BattleScene::Load(const std::string& FileName)//TODO(Nick): Figure out normal loading variant
 {
+	std::ifstream SceneFile;
+	SceneFile.open(FileName);
+
 	Render_ = std::make_unique<class Render>(400,400);
 
-	TargetPtr Uther(new Hero("Uther", "res/img/sprite_base_addon_2012_12_14.png", sf::IntRect(10, 10, 70, 70),
-	                         HeroDefinitions::Hero));
-	TargetPtr AUther(new Hero("Arthas", "res/img/sprite_base_addon_2012_12_14.png", sf::IntRect(10, 10, 70, 70),
-	                          HeroDefinitions::Enemy));
 
-	AddCharacter(move(Uther));
-	AddCharacter(move(AUther));
+	auto Characters=TagXmlParser::FindAllTags<std::string>(SceneFile,"Hero");
+	for (const auto& Char:Characters)
+	{
+		AddCharacter(std::make_shared<Hero>(Char));
+	}
+
 	SetupCharactersPosition();
 
-	this->Actions_.push_back(ActionPtr(new NameAction));
-	this->Actions_.push_back(ActionPtr(new SideAction));
-	this->Actions_.push_back(ActionPtr(new TargetAction));
+	this->Characters.at(CurrentChar_)->Graphic->LoadAnimation(AnimationState::Chosen);
 
+
+	SceneFile.close();
 }
 
-bool BattleScene::CheckActionQueue()//NOTE(Nick): Cause some actions may have countdown, i probably should switch to vector instead of queue
-{
-	if (ActionQueue_.empty())
-	{
-		return true;
-	}
-
-	auto CurrentAction = ActionQueue_.front().first;
-	const auto CurrentHero = ActionQueue_.front().second;
-
-	CurrentAction->Execute(*CurrentHero);
-
-	if (CurrentAction->IsResolved)
-	{
-		ActionQueue_.pop();
-	}
-
-	return false;
-};
 
 void BattleScene::SetupCharactersPosition() noexcept//NOTE(Nick):still not sure if this belongs here
 {
@@ -200,15 +168,15 @@ void BattleScene::SetupCharactersPosition() noexcept//NOTE(Nick):still not sure 
 	auto EnemyCount(0);
 	const auto SpriteSpace(100);
 
-	for (auto& Char : Characters)
+	for (auto& Char : Characters)//NOTE(Nick): If I could guarantee that Characters list is order by side, I could move this to Render class
 	{
-		if (Char->Side == HeroDefinitions::Hero) {
+		if (Char->Side == HeroDef::Hero) {
 			HeroCount++;
 			Char->Graphic->Sprite.setPosition(static_cast<float>(Render_->RenderWidth) / 2 - static_cast<float>(SpriteSpace * HeroCount),
 			                                  static_cast<float>(Render_->RenderHeight) / 2);
 
 		}
-		else if (Char->Side == HeroDefinitions::Enemy) {
+		else if (Char->Side == HeroDef::Enemy) {
 			EnemyCount++;
 			Char->Graphic->Sprite.setPosition(static_cast<float>(Render_->RenderWidth) / 2 + static_cast<float>(SpriteSpace * EnemyCount),
 			                                  static_cast<float>(Render_->RenderHeight) / 2);

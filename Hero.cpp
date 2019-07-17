@@ -1,13 +1,32 @@
 #include "Hero.h"
 
+#include "NameAction.h"
+#include "SideAction.h"
+#include "TargetAction.h"
 
-Hero::Hero(std::string Name, const std::string& TexturePath, sf::IntRect StartRect, const HeroDefinitions::Side Side)
-	:Name(std::move(Name)), Side(Side)
+Hero::Hero(const std::string& FileName)
 {
-	//Graphic init
-	Graphic = std::make_unique<GraphicHero>(TexturePath, StartRect);
-	//Game init
+	std::ifstream HeroFile;
+	HeroFile.open(FileName);
+
+	Name=TagXmlParser::FindTag<std::string>(HeroFile,"Name");
+
+	const auto SideString=TagXmlParser::FindTag<std::string>(HeroFile,"Side");
+	if (SideString=="Hero")
+	{
+		Side=HeroDef::Hero;
+	}
+	else if(SideString=="Enemy")
+	{
+		Side=HeroDef::Enemy;
+	}
+
+	Graphic = std::make_unique<GraphicHero>(HeroFile);
+
+	Actions.push_back(HeroDef::ActionPtr(new NameAction));
+	Actions.push_back(HeroDef::ActionPtr(new SideAction));
+	Actions.push_back(HeroDef::ActionPtr(new TargetAction));
+
+	HeroFile.close();
 }
-
-
 

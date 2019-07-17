@@ -1,23 +1,32 @@
 #pragma once
 
 #include <string>
-#include "GraphicHero.h"
 #include <memory>
-namespace HeroDefinitions {
+#include "GraphicHero.h"
+#include "TagXMLParser.h"
+#include "Action.h"
+
+class Action;
+
+namespace HeroDef {
+	using ActionPtr=std::shared_ptr<Action>;
 	enum Side{Hero,Enemy};
 };
 
 class Hero
 {
 public:
+	explicit Hero(const std::string& FileName);
 
-	Hero(std::string Name, const std::string& TexturePath, sf::IntRect StartRect,HeroDefinitions::Side Side);
-	
 	std::string Name;
-	HeroDefinitions::Side Side;
+	HeroDef::Side Side;
 
 	std::shared_ptr<class GraphicHero> Graphic;
 
 	~Hero() = default;
+
+
+	unsigned int CurrentAction= 0;
+	std::vector<HeroDef::ActionPtr> Actions;
 };
 

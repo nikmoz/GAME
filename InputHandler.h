@@ -2,17 +2,30 @@
 #include "Observer.h"
 #include <vector>
 #include <memory>
-#include <SFML/Window.hpp>
+#include <map>
 
-using Subscriber=std::shared_ptr<class Observer>;
+#include <SFML/Window/Keyboard.hpp>
+
+namespace HandlerDef
+{
+	using Subscriber=std::shared_ptr<class Observer>;
+}
+enum class KeyState
+{
+	Pressed,
+	Released
+};
 
 class InputHandler
 {
 public:
-	void Subscribe(const Subscriber& Sub);
+	InputHandler();
+
+	void Subscribe(Observer* Sub);
 	void HandleInput();
-	std::vector<Subscriber> Subs;
+	std::vector<Observer*> Subs={};
 private:
-	void Notify(Keyboard::Keys Key);
+	static std::map<sf::Keyboard::Key,KeyState> Key_;
+	void Notify(sf::Keyboard::Key Key);
 };
 
