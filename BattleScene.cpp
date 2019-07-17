@@ -57,7 +57,7 @@ void BattleScene::AddCharacter(SceneDef::TargetPtr&& Character) noexcept
 				No copies of standard actions in standard encounters
 				This will move all Action resolving staff into Hero class, and easy to implement, 
 				but I'l be stuck with same Attack,Defend, Skill (and future Party) pattern
-		Solution 3:(Done)(Easy, but messy code)
+		Solution 3:(Done)(Easy, but messy code)~~
 			Keep it that way, and think of format, that can save all information needed
 			Argument:
 				Headers aren't this kind of problem you should be thinking of
