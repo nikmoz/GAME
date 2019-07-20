@@ -1,7 +1,6 @@
 #include "BattleScene.h"
 
 #include "Action.h"
-#include <iostream>
 
 
 BattleScene::BattleScene()
@@ -77,7 +76,8 @@ void BattleScene::AddCharacter(SceneDef::TargetPtr&& Character) noexcept
 	Root 3: Separated Scene and render means InputHandler code duplication(Solved)
 */
 
-BattleSceneDef::ActionPtr BattleScene::ChooseAction(const sf::Keyboard::Key Key)//TODO(Nick):Read about Factory method
+BattleSceneDef::ActionPtr BattleScene::ChooseAction(const sf::Keyboard::Key Key) const
+//TODO(Nick):Read about Factory method
 {
 	//static auto I(0U);
 

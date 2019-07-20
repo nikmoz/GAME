@@ -1,6 +1,5 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include <fstream>
 #include "TagXMLParser.h"
 #include <chrono>
 #include <map>

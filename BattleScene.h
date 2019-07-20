@@ -3,7 +3,6 @@
 #include "Scene.h"
 #include "Observer.h"
 #include "InputHandler.h"
-#include <vector>
 
 #include "NextAction.h"
 #include "PrevAction.h"
@@ -16,7 +15,7 @@ namespace BattleSceneDef
 	using ActionPtr=std::shared_ptr<class Action>;
 }
 
-class BattleScene:public Scene,public Observer
+class BattleScene final :public Scene,public Observer
 {
 public:
 	
@@ -46,7 +45,7 @@ private:
 	BattleSceneDef::ActionPtr PrevAction_=BattleSceneDef::ActionPtr(new PrevAction);
 	BattleSceneDef::ActionPtr ExecuteAction_=BattleSceneDef::ActionPtr(new ExecuteAction);
 
-	BattleSceneDef::ActionPtr ChooseAction(sf::Keyboard::Key Key);
+	BattleSceneDef::ActionPtr ChooseAction(sf::Keyboard::Key Key) const;
 
 };
 

@@ -2,7 +2,6 @@
 #include "Scene.h"
 #include "Observer.h"
 #include "InputHandler.h"
-#include "Game.h"
 #include "Hero.h"
 
 class Hero;
@@ -29,9 +28,9 @@ public:
 private:
 	
 
-	unsigned int ChooseTarget(sf::Keyboard::Key Key);
+	int ChooseTarget(sf::Keyboard::Key Key);
 
-	unsigned int CurrentTarget_ = 0;
+	int CurrentTarget_ = 0;
 
 	std::unique_ptr<class InputHandler> TargetInputHandler_;
 }; 

@@ -1,7 +1,7 @@
 #include "TargetScene.h"
 #include <iostream>
 #include <utility>
-
+#include "Game.h"
 
 TargetScene::TargetScene(std::vector<TargetSceneDef::TargetPtr> Targets)
 {
@@ -61,7 +61,7 @@ void TargetScene::Unload()
 
 }
 
-unsigned int TargetScene::ChooseTarget(const sf::Keyboard::Key Key)
+int TargetScene::ChooseTarget(const sf::Keyboard::Key Key)
 {
 
 	if (Key == sf::Keyboard::Left)
@@ -75,7 +75,7 @@ unsigned int TargetScene::ChooseTarget(const sf::Keyboard::Key Key)
 
 	if (Key == sf::Keyboard::Right)
 	{
-		if (CurrentTarget_ < Characters.size() - 1)
+		if (static_cast<unsigned int>(CurrentTarget_) < Characters.size() - 1)
 		{
 			CurrentTarget_++;
 		}

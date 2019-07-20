@@ -2,7 +2,6 @@
 #include "SFML/Graphics/Text.hpp"
 
 #include "TagXMLParser.h"
-//#include <fstream>
 class Dialog
 {
 public:
