@@ -24,6 +24,6 @@ public:
 
 protected:
 	std::shared_ptr<Render> Render_;
-
+	std::shared_ptr<class Scene> PreviousScene_;
 };
 

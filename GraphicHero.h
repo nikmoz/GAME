@@ -4,6 +4,7 @@
 #include "TagXMLParser.h"
 #include <chrono>
 #include <map>
+#include "Animation.h"
 
 enum class AnimationState
 {
@@ -31,18 +32,12 @@ private:
 	AnimationState CurrentAnimation_=AnimationState::None;
 
 	std::map<AnimationState,std::string> AnimationMap_;
-	//AutoIncrementer<sf::Sprite> AnimationIncrement_;
+
 	double OldTime_=0;
 	double NewTime_=0;
-	//double TotalTime_=0;
 
-	double AnimationDuration_{};
-	int AnimationFrames_{};
-	int SpriteSpacing_{};
-
-	sf::Texture Texture_;
-
-	int EndRect_{};
+	std::shared_ptr<AnimationData> Animation_;
+	
 	sf::IntRect SpriteRect_;
 };
 

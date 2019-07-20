@@ -1,11 +1,11 @@
 TODO:
-1)Action Loading
-2)Class system(Paladin)
-3)Resource editor(probably in Python)
-4)Menu
-5)Dialog system
-6)Optimization
+-Action Loading(Done)
+-Resource editor(probably in Python)
+-Menu
+-Dialog system
+-Optimization
+-Ñountdown actions
 
 Encapsulation:
-1)Move Hero.Name and Hero.Side to private, create GetName(),GetSide()
-2)Move Hero.Actions and Hero.CurrentAction to private, crate NextAction(),PrevAction(),ExecuteAction()
+-Move Hero.Name and Hero.Side to private, create GetName(),GetSide()
+-Move Hero.Actions and Hero.CurrentAction to private, crate NextAction(),PrevAction(),ExecuteAction()

@@ -23,22 +23,23 @@ Hero::Hero(const std::string& FileName)
 
 	Graphic = std::make_shared<GraphicHero>(HeroFile);
 
-	auto Skills=TagXmlParser::FindAllTags<std::string>(HeroFile,"Action");
-	for (const auto& Skill:Skills)//TODO(Nick):Create map for Actions
+	auto Skills = TagXmlParser::FindAllTags<std::string>(HeroFile, "Action");
+	for (const auto& Skill : Skills) //TODO(Nick):Create map for Actions
 	{
-		if(Skill=="NameAction")
+		if (Skill == "NameAction")
 		{
 			Actions.push_back(HeroDef::ActionPtr(new NameAction));
 		}
-		else if(Skill=="SideAction")
+		else if (Skill == "SideAction")
 		{
 			Actions.push_back(HeroDef::ActionPtr(new SideAction));
 		}
-		else if(Skill=="TargetAction")
+		else if (Skill == "TargetAction")
 		{
 			Actions.push_back(HeroDef::ActionPtr(new TargetAction));
 		}
 	}
+
 	HeroFile.close();
 }
 

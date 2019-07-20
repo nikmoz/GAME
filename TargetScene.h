@@ -27,7 +27,7 @@ public:
 	void Load(const std::string& FileName) override;
 	void Unload() override;
 private:
-	std::shared_ptr<class Scene> PreviousScene_;
+	
 
 	unsigned int ChooseTarget(sf::Keyboard::Key Key);
 

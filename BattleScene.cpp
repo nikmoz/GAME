@@ -124,13 +124,12 @@ void BattleScene::Update(const sf::Keyboard::Key Key)
 
 void BattleScene::UpdateScene()
 {
+	Characters.at(CurrentChar_)->Graphic->LoadAnimation(AnimationState::Chosen);
 	TurnInputHandler_->HandleInput();
 };
 
 void BattleScene::Redraw()
 {
-	Characters.at(CurrentChar_)->Graphic->LoadAnimation(AnimationState::Chosen);
-
 	Render_->RenderScene();
 
 	for (auto& Char:Characters)

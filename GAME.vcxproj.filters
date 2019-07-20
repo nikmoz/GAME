@@ -51,6 +51,7 @@
     <ClCompile Include="PrevAction.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
+    <ClCompile Include="Dialog.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -105,6 +106,10 @@
     <ClInclude Include="PrevAction.h">
       <Filter>Actions</Filter>
     </ClInclude>
+    <ClInclude Include="Dialog.h" />
+    <ClInclude Include="Animation.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="res\xml\Arthas.xml">
@@ -145,6 +150,9 @@
     <Filter Include="res\Xml">
       <UniqueIdentifier>{79d14d1e-8449-4625-b6e6-f111f197c41b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Animation">
+      <UniqueIdentifier>{9bf65d8f-03c5-44c6-ac8b-28afb6aee0be}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\img\sprite_base_addon_2012_12_14.png">
@@ -155,5 +163,8 @@
     <Text Include="Todo.txt">
       <Filter>res</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>
