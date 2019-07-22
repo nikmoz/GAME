@@ -1,10 +1,11 @@
 #include "Render.h"
 Render::Render(const int RenderWidth, const int RenderHeight) :RenderWidth(RenderWidth), RenderHeight(RenderHeight)
 {
-	Characters = {};
+	Characters_ = {};
 };
 
-void Render::RenderScene() {
+void Render::RenderScene()
+{
 	static sf::RenderWindow WindowScene(sf::VideoMode(RenderWidth, RenderHeight), "Test");
 
 	if (WindowScene.isOpen())
@@ -19,13 +20,28 @@ void Render::RenderScene() {
 		}
 
 		WindowScene.clear();
-		for (auto& Char : Characters) {
+		for (auto& Char : Characters_)
+		{
 			WindowScene.draw(Char->Sprite);
 		}
+		for(auto& Dialog: Dialogs_)
+		{
+			if (!Dialog->LineDone)
+			{
+				Dialog->Update();
+				WindowScene.draw(Dialog->Text);
+			}
+		}
+
 		WindowScene.display();
 	}
 };
 void Render::AddCharacter(const GraphicHeroPtr& Character) noexcept
 {
-	Characters.push_back(Character);
+	Characters_.push_back(Character);
+}
+
+void Render::AddDialog(const DialogPtr& Dialog) noexcept
+{
+	Dialogs_.push_back(Dialog);
 };

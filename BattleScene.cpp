@@ -152,6 +152,9 @@ void BattleScene::Load(const std::string& FileName)//TODO(Nick): Figure out norm
 		AddCharacter(std::make_shared<Hero>(Char));
 	}
 
+	const auto Test=std::make_shared<Dialog>("Damn it Uther! As your future king, I order you to purge this city");
+	Render_->AddDialog(Test);
+
 	SetupCharactersPosition();
 
 	this->Characters.at(CurrentChar_)->Graphic->LoadAnimation(AnimationState::Chosen);
