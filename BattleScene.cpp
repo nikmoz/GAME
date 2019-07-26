@@ -17,17 +17,6 @@ void BattleScene::AddCharacter(SceneDef::TargetPtr&& Character) noexcept
 	Render_->AddObject(Character->Graphic);
 }
 
-/*THEME(Nick):Turn() 
-	Problem 1:How to change targets without passing Characters to Hero Class
-	Problem 2:Attack and Defend consumes turn, while ChangeTarget doesn't
-	Problem 3:Skill system allows for multiple target types and multiple turn actions, which leads to bigger problem than problem 1
-
-	Solution 1(checking...):
-	Create Action queue and countdown param in Action (Done)
-	Create LoadAction() that loads Action list for scene(probably move to global scene load later)
-	Create ChooseAction() that returns Action(Command pattern) (Done)
-	Execute Action, which leads to finding out target and executing one of the functions in Hero (Done)
-*/
 /*THEME(Nick):ChooseAction()
 	The way is see it:
 	Battle starts->

@@ -9,7 +9,7 @@ void TargetAction::Execute(Hero& Actor)
 
 void TargetAction::ChooseTargets(Hero& Actor)
 {
-	for (auto& Char : Game::CurrentScene->Characters)
+	for (auto& Char : Game::SceneStack.front()->Characters)
 	{
 		if (Char->Side != Actor.Side)
 		{

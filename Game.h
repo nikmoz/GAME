@@ -1,13 +1,18 @@
 #pragma once
 #include "Scene.h"
 #include <memory>
-#include <thread>
+#include <deque>
+
+namespace GameDef
+{
+	using ScenePtr=std::shared_ptr<class Scene>;
+}
 class Game
 {
 public:
-
 	static void StartGame();
 	static void InitScene();
-	static std::shared_ptr<class Scene> CurrentScene;
+
+	static std::deque<GameDef::ScenePtr> SceneStack;
 };
 

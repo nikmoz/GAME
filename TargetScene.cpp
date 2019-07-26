@@ -19,7 +19,6 @@ TargetScene::TargetScene(const TargetScene& Target)
 	TargetInputHandler_ = std::make_unique<InputHandler>();
 	TargetInputHandler_->Subscribe(this);
 
-	PreviousScene_=Target.PreviousScene_;
 
 	CurrentTarget_=Target.CurrentTarget_;
 }
@@ -43,22 +42,16 @@ void TargetScene::UpdateScene()
 	TargetInputHandler_->HandleInput();
 }
 
-void TargetScene::Redraw()
-{
-	PreviousScene_->Redraw();
-}
+void TargetScene::Redraw(){}
 
 void TargetScene::Load(const std::string& FileName)
 {
-	PreviousScene_=Game::CurrentScene;
-	Game::CurrentScene=std::make_shared<TargetScene>(*this);
+	Game::SceneStack.push_front(std::make_shared<TargetScene>(*this));
 }
 
 void TargetScene::Unload()
 {
-
-	Game::CurrentScene=PreviousScene_;
-
+	Game::SceneStack.pop_front();
 }
 
 int TargetScene::ChooseTarget(const sf::Keyboard::Key Key)

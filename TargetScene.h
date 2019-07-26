@@ -26,7 +26,6 @@ public:
 	void Load(const std::string& FileName) override;
 	void Unload() override;
 private:
-	
 
 	int ChooseTarget(sf::Keyboard::Key Key);
 

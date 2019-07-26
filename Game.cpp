@@ -3,24 +3,26 @@
 #include "BattleScene.h" //NOTE(Nick): Stays here before I can make state machine for SceneChanging
 
 
-using std::shared_ptr;
 
-
-shared_ptr<Scene> Game::CurrentScene = nullptr;
+std::deque<GameDef::ScenePtr> Game::SceneStack{};
 
 void Game::StartGame() 
 {
 
 	while (true)
 	{
-		Game::CurrentScene->Redraw();
-		Game::CurrentScene->UpdateScene();
+		for(const auto& Scene:SceneStack)
+		{
+			Scene->Redraw();
+		}
+		Game::SceneStack.front()->UpdateScene();
 	}
 };
 
 void Game::InitScene()
 {
-	Game::CurrentScene = std::make_shared<BattleScene>();
-	
-	Game::CurrentScene->Load("res/xml/Scene.xml");
+
+	Game::SceneStack.push_back(std::make_shared<BattleScene>());
+
+	Game::SceneStack.front()->Load("res/xml/Scene.xml");
 };
