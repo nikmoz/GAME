@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "Graphic.h"
 #include "TagXMLParser.h"
 #include <chrono>
 #include <map>
@@ -13,15 +14,15 @@ enum class AnimationState
 };
 
 using namespace std::chrono_literals;
-class GraphicHero
+class GraphicHero final :public Graphic
 {
 public:
 	explicit GraphicHero(const std::string& FilePath);
 	explicit GraphicHero(std::ifstream& GraphicFile);
 
-
+	void Render(sf::RenderWindow& WindowScene) override;
 	void LoadAnimation(AnimationState Animation);
-	void Update();//NOTE(Nick):Google about sprite animation
+	void Update() override;
 
 	~GraphicHero()=default;
 

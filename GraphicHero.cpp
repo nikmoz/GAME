@@ -44,6 +44,11 @@ GraphicHero::GraphicHero(std::ifstream& GraphicFile)
 	//GraphicFile.close();
 }
 
+void GraphicHero::Render(sf::RenderWindow& WindowScene)
+{
+	WindowScene.draw(Sprite);
+}
+
 
 void GraphicHero::LoadAnimation(const AnimationState Animation)
 {

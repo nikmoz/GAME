@@ -14,6 +14,11 @@ Dialog::Dialog(std::string Text)
 	this->Text.setPosition(50,150);//TODO:Create Parent-Child system for binding with Hero or Menu
 }
 
+void Dialog::Render(sf::RenderWindow& WindowScene)
+{
+	WindowScene.draw(Text);
+}
+
 void Dialog::Update()
 {
 	static auto I(0U);//TODO:Create generator

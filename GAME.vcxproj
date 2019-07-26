@@ -148,8 +148,10 @@
     <ClCompile Include="Action.cpp" />
     <ClCompile Include="AutoIncrementer.cpp" />
     <ClCompile Include="Dialog.cpp" />
+    <ClCompile Include="DialogScene.cpp" />
     <ClCompile Include="ExecuteAction.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Graphic.cpp" />
     <ClCompile Include="GraphicHero.cpp" />
     <ClCompile Include="Hero.cpp" />
     <ClCompile Include="InputHandler.cpp" />
@@ -172,8 +174,10 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="AutoIncrementer.h" />
     <ClInclude Include="Dialog.h" />
+    <ClInclude Include="DialogScene.h" />
     <ClInclude Include="ExecuteAction.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Graphic.h" />
     <ClInclude Include="GraphicHero.h" />
     <ClInclude Include="Hero.h" />
     <ClInclude Include="InputHandler.h" />

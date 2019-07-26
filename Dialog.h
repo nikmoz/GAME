@@ -1,12 +1,14 @@
 #pragma once
 #include "SFML/Graphics/Text.hpp"
-
+#include "Graphic.h"
 #include "TagXMLParser.h"
-class Dialog
+class Dialog final : public Graphic
 {
 public:
 	explicit Dialog(std::string Text);
-	void Update();
+
+	void Render(sf::RenderWindow& WindowScene) override;
+	void Update() override;
 	sf::Text Text;
 
 	bool LineDone=false;

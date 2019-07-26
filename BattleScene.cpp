@@ -1,5 +1,6 @@
 #include "BattleScene.h"
 
+#include "Dialog.h"
 #include "Action.h"
 
 
@@ -13,7 +14,7 @@ BattleScene::BattleScene()
 void BattleScene::AddCharacter(SceneDef::TargetPtr&& Character) noexcept
 {
 	Characters.push_back(Character);
-	Render_->AddCharacter(Character->Graphic);
+	Render_->AddObject(Character->Graphic);
 }
 
 /*THEME(Nick):Turn() 
@@ -131,11 +132,6 @@ void BattleScene::UpdateScene()
 void BattleScene::Redraw()
 {
 	Render_->RenderScene();
-
-	for (auto& Char:Characters)
-	{
-		Char->Graphic->Update();
-	}
 };
 
 void BattleScene::Load(const std::string& FileName)//TODO(Nick): Figure out normal loading variant
@@ -153,7 +149,7 @@ void BattleScene::Load(const std::string& FileName)//TODO(Nick): Figure out norm
 	}
 
 	const auto Test=std::make_shared<Dialog>("Damn it Uther! As your future king, I order you to purge this city");
-	Render_->AddDialog(Test);
+	Render_->AddObject(Test);
 
 	SetupCharactersPosition();
 
