@@ -13,6 +13,6 @@ public:
 	static void StartGame();
 	static void InitScene();
 
-	static std::deque<GameDef::ScenePtr> SceneStack;
+	static std::deque<GameDef::ScenePtr> SceneStack;//NOTE:Probably change to vector, to evade bugs with pop_front()
 };
 

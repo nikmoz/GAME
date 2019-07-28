@@ -1,5 +1,6 @@
 #include "DialogScene.h"
 
+
 void DialogScene::UpdateScene()
 {
 }

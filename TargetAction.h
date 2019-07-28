@@ -1,5 +1,6 @@
 #pragma once
 
+#include "BattleScene.h"
 #include "Action.h"
 #include "Game.h"
 #include <vector>

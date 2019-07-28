@@ -1,6 +1,6 @@
 #pragma once
 #include "Scene.h"
-class DialogScene :
+class DialogScene final :
 	public Scene
 {
 	void UpdateScene() override;
