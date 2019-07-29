@@ -17,10 +17,10 @@ using namespace std::chrono_literals;
 class GraphicHero final :public Graphic
 {
 public:
-	explicit GraphicHero(const std::string& FilePath);
+	explicit GraphicHero(std::string_view FilePath);
 	explicit GraphicHero(std::ifstream& GraphicFile);
 
-	void Render(sf::RenderWindow& WindowScene) override;
+	inline void Render(sf::RenderWindow& WindowScene) override;
 	void LoadAnimation(AnimationState Animation);
 	void Update() override;
 

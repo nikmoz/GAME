@@ -9,7 +9,7 @@ void DialogScene::Redraw()
 {
 }
 
-void DialogScene::Load(const std::string& FileName)
+void DialogScene::Load(std::string_view FileName)
 {
 }
 

@@ -112,9 +112,6 @@
     <ClInclude Include="PrevAction.h">
       <Filter>Actions</Filter>
     </ClInclude>
-    <ClInclude Include="Animation.h">
-      <Filter>Animation</Filter>
-    </ClInclude>
     <ClInclude Include="GraphicHero.h">
       <Filter>Graphic</Filter>
     </ClInclude>
@@ -129,6 +126,9 @@
     </ClInclude>
     <ClInclude Include="DialogScene.h">
       <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Graphic</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -169,9 +169,6 @@
     </Filter>
     <Filter Include="res\Xml">
       <UniqueIdentifier>{79d14d1e-8449-4625-b6e6-f111f197c41b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Animation">
-      <UniqueIdentifier>{9bf65d8f-03c5-44c6-ac8b-28afb6aee0be}</UniqueIdentifier>
     </Filter>
     <Filter Include="Graphic">
       <UniqueIdentifier>{96ea024a-1f73-47c3-b231-b3167f682f14}</UniqueIdentifier>

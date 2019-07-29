@@ -1,18 +1,18 @@
 #include "GraphicHero.h"
 
-GraphicHero::GraphicHero(const std::string& FilePath)
+GraphicHero::GraphicHero(std::string_view FilePath)
 {
 	std::ifstream GraphicFile;
-	GraphicFile.open(FilePath);
+	GraphicFile.open(FilePath.data());
 
 	Animation_=std::make_shared<AnimationData>();
 
 	const auto TexturePath=TagXmlParser::FindTag<std::string>(GraphicFile,"TexturePath");
 
-	std::pair<AnimationState,std::string> IdleAnim(AnimationState::Idle,TagXmlParser::FindTag<std::string>(GraphicFile,"Idle"));
+	std::pair IdleAnim(AnimationState::Idle,TagXmlParser::FindTag<std::string>(GraphicFile,"Idle"));
 	AnimationMap_.emplace(IdleAnim);
 
-	std::pair<AnimationState,std::string> ChosenAnim(AnimationState::Chosen,TagXmlParser::FindTag<std::string>(GraphicFile,"Chosen"));
+	std::pair ChosenAnim(AnimationState::Chosen,TagXmlParser::FindTag<std::string>(GraphicFile,"Chosen"));
 	AnimationMap_.emplace(ChosenAnim);
 	
 	LoadAnimation(AnimationState::Idle);
@@ -30,10 +30,10 @@ GraphicHero::GraphicHero(std::ifstream& GraphicFile)
 
 	const auto TexturePath=TagXmlParser::FindTag<std::string>(GraphicFile,"TexturePath");
 
-	std::pair<AnimationState,std::string> IdleAnim(AnimationState::Idle,TagXmlParser::FindTag<std::string>(GraphicFile,"Idle"));
+	std::pair IdleAnim(AnimationState::Idle,TagXmlParser::FindTag<std::string>(GraphicFile,"Idle"));
 	AnimationMap_.emplace(IdleAnim);
 
-	std::pair<AnimationState,std::string> ChosenAnim(AnimationState::Chosen,TagXmlParser::FindTag<std::string>(GraphicFile,"Chosen"));
+	std::pair ChosenAnim(AnimationState::Chosen,TagXmlParser::FindTag<std::string>(GraphicFile,"Chosen"));
 	AnimationMap_.emplace(ChosenAnim);
 
 	LoadAnimation(AnimationState::Idle);

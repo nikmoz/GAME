@@ -4,7 +4,8 @@
 #include "Game.h"
 
 
-TargetScene::TargetScene(std::vector<TargetSceneDef::TargetPtr> Targets,std::shared_ptr<class TargetAction> Action): Action_(std::move(Action)) {
+TargetScene::TargetScene(std::vector<TargetSceneDef::TargetPtr> Targets,std::shared_ptr<class TargetAction> Action): Action_(std::move(Action)) 
+{
 	Characters=std::move(Targets);
 	TargetInputHandler_ = std::make_unique<InputHandler>();
 	TargetInputHandler_->Subscribe(this);
@@ -44,7 +45,7 @@ void TargetScene::UpdateScene()
 
 void TargetScene::Redraw(){}
 
-void TargetScene::Load(const std::string& FileName)
+void TargetScene::Load(std::string_view FileName)
 {
 	Game::SceneStack.push_front(std::make_shared<TargetScene>(*this));
 }

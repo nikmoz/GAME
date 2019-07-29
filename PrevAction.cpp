@@ -11,5 +11,4 @@ void PrevAction::Execute(Hero& Actor)
 	{
 		Actor.CurrentAction--;
 	}
-
 }

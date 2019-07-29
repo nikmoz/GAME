@@ -25,17 +25,16 @@ public:
 	~BattleScene() = default;
 
 
-	void Load(const std::string& FileName) override;
+	void Load(std::string_view FileName) override;
 
 	void UpdateScene() override; //Calculates scene next state
-	void Update(sf::Keyboard::Key Key)override;//Reacts to key Input
+	inline void Update(sf::Keyboard::Key Key)override;//Reacts to key Input
 
 	void Unload() override {};
-	void Redraw() override;
+	inline void Redraw() override;
 
-	void AddCharacter(SceneDef::TargetPtr&& Character) noexcept;
+	inline void AddCharacter(SceneDef::TargetPtr&& Character) noexcept;
 
-	
 private:
 	unsigned int CurrentChar_ = 0;
 
@@ -47,7 +46,7 @@ private:
 	BattleSceneDef::ActionPtr PrevAction_=BattleSceneDef::ActionPtr(new PrevAction);
 	BattleSceneDef::ActionPtr ExecuteAction_=BattleSceneDef::ActionPtr(new ExecuteAction);
 
-	std::optional<BattleSceneDef::ActionPtr> ChooseAction(sf::Keyboard::Key Key) const;
+	[[nodiscard]] std::optional<BattleSceneDef::ActionPtr> ChooseAction(sf::Keyboard::Key Key) const;
 
 };
 

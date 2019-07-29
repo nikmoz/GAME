@@ -69,8 +69,6 @@ void BattleScene::AddCharacter(SceneDef::TargetPtr&& Character) noexcept
 std::optional<BattleSceneDef::ActionPtr> BattleScene::ChooseAction(const sf::Keyboard::Key Key) const
 //TODO(Nick):Read about Factory method
 {
-	//static auto I(0U);
-
 	if (Key==sf::Keyboard::Down)
 	{
 		return NextAction_;
@@ -123,10 +121,10 @@ void BattleScene::Redraw()
 	Render_->RenderScene();
 };
 
-void BattleScene::Load(const std::string& FileName)//TODO(Nick): Figure out normal loading variant
+void BattleScene::Load(std::string_view FileName)//TODO(Nick): Figure out normal loading variant
 {
 	std::ifstream SceneFile;
-	SceneFile.open(FileName);
+	SceneFile.open(FileName.data());
 
 	Render_ = std::make_unique<class Render>(400,400);
 

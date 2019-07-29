@@ -19,7 +19,7 @@ void TargetAction::ChooseTargets(Hero& Actor)
 	}
 }
 
-auto TargetAction::Resolve(const std::shared_ptr<Hero>& Targets) -> void
+inline void TargetAction::Resolve(const std::shared_ptr<Hero>& Targets)
 {
 	std::cout << "Target Name:" << Targets->Name << std::endl;
 }

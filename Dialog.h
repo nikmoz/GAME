@@ -7,7 +7,7 @@ class Dialog final : public Graphic
 public:
 	explicit Dialog(std::string Text);
 
-	void Render(sf::RenderWindow& WindowScene) override;
+	inline void Render(sf::RenderWindow& WindowScene) override;
 	void Update() override;
 	sf::Text Text;
 

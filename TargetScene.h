@@ -23,10 +23,10 @@ public:
 
 	void Update(sf::Keyboard::Key Key) override;
 
-	void UpdateScene() override;
-	void Redraw() override;
-	void Load(const std::string& FileName) override;
-	void Unload() override;
+	inline void UpdateScene() override;
+	inline void Redraw() override;
+	inline void Load(std::string_view FileName) override;
+	inline void Unload() override;
 private:
 	std::optional<int> ChooseTarget(sf::Keyboard::Key Key);
 

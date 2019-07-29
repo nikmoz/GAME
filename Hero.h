@@ -16,7 +16,7 @@ namespace HeroDef {
 class Hero
 {
 public:
-	explicit Hero(const std::string& FileName);
+	explicit Hero(std::string_view FileName);
 
 	std::string Name;
 	HeroDef::Side Side;

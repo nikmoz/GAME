@@ -5,7 +5,7 @@ class DialogScene final :
 {
 	void UpdateScene() override;
 	void Redraw() override;
-	void Load(const std::string& FileName) override;
+	void Load(std::string_view FileName) override;
 	void Unload() override;
 };
 

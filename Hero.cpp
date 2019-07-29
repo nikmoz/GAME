@@ -4,10 +4,10 @@
 #include "SideAction.h"
 #include "TargetAction.h"
 
-Hero::Hero(const std::string& FileName)
+Hero::Hero(std::string_view FileName)
 {
 	std::ifstream HeroFile;
-	HeroFile.open(FileName);
+	HeroFile.open(FileName.data());
 
 	Name=TagXmlParser::FindTag<std::string>(HeroFile,"Name");
 
@@ -24,6 +24,7 @@ Hero::Hero(const std::string& FileName)
 	Graphic = std::make_shared<GraphicHero>(HeroFile);
 
 	auto Skills = TagXmlParser::FindAllTags<std::string>(HeroFile, "Action");
+
 	for (const auto& Skill : Skills) //TODO(Nick):Create map for Actions
 	{
 		if (Skill == "NameAction")
