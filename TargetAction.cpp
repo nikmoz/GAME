@@ -1,9 +1,10 @@
 #include "TargetAction.h"
+#include <iostream>
 
 void TargetAction::Execute(Hero& Actor)
 {
 	ChooseTargets(Actor);
-	auto TScene= std::make_shared<TargetScene>(PossibleTargets_);
+	auto TScene= std::make_shared<TargetScene>(PossibleTargets_,std::make_shared<TargetAction>(*this));
 	TScene->Load("");
 }
 
@@ -16,4 +17,9 @@ void TargetAction::ChooseTargets(Hero& Actor)
 			PossibleTargets_.push_back(Char);
 		}
 	}
+}
+
+auto TargetAction::Resolve(const std::shared_ptr<Hero>& Targets) -> void
+{
+	std::cout << "Target Name:" << Targets->Name << std::endl;
 }

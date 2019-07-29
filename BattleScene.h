@@ -10,6 +10,8 @@
 
 #include "TagXMLParser.h"
 
+#include <optional>
+
 namespace BattleSceneDef
 {
 	using ActionPtr=std::shared_ptr<class Action>;
@@ -45,7 +47,7 @@ private:
 	BattleSceneDef::ActionPtr PrevAction_=BattleSceneDef::ActionPtr(new PrevAction);
 	BattleSceneDef::ActionPtr ExecuteAction_=BattleSceneDef::ActionPtr(new ExecuteAction);
 
-	BattleSceneDef::ActionPtr ChooseAction(sf::Keyboard::Key Key) const;
+	std::optional<BattleSceneDef::ActionPtr> ChooseAction(sf::Keyboard::Key Key) const;
 
 };
 

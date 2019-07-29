@@ -1,8 +1,10 @@
 #pragma once
+#include <optional>
 #include "Scene.h"
 #include "Observer.h"
 #include "InputHandler.h"
 #include "Hero.h"
+#include "TargetAction.h"
 
 class Hero;
 
@@ -15,7 +17,7 @@ class TargetScene final :
 	public Scene, public Observer
 {
 public:
-	explicit TargetScene(std::vector<TargetSceneDef::TargetPtr> Targets);
+	explicit TargetScene(std::vector<TargetSceneDef::TargetPtr> Targets,std::shared_ptr<class TargetAction> Action);
 	TargetScene(const TargetScene& Target);
 	~TargetScene()=default;
 
@@ -26,8 +28,9 @@ public:
 	void Load(const std::string& FileName) override;
 	void Unload() override;
 private:
+	std::optional<int> ChooseTarget(sf::Keyboard::Key Key);
 
-	int ChooseTarget(sf::Keyboard::Key Key);
+	std::shared_ptr<class TargetAction> Action_;
 
 	int CurrentTarget_ = 0;
 

@@ -1,6 +1,5 @@
 #pragma once
-
-#include "BattleScene.h"
+#include "Hero.h"
 #include "Action.h"
 #include "Game.h"
 #include <vector>
@@ -12,6 +11,7 @@ public:
 	~TargetAction()=default;
 	virtual void Execute(Hero& Actor) override;
 	virtual void ChooseTargets(Hero& Actor);
+	virtual void Resolve(const std::shared_ptr<Hero>& Targets);
 private:
-	std::vector<TargetSceneDef::TargetPtr>PossibleTargets_ = {};
+	std::vector<std::shared_ptr<Hero>> PossibleTargets_ = {};
 };

@@ -24,7 +24,9 @@ void Dialog::Update()
 	static auto I(0U);//TODO:Create generator
 
 	NewTime_=clock()/1000.0;
-	if (NewTime_-OldTime_>0.01){
+
+	if (NewTime_-OldTime_>0.01)
+	{
 		OldTime_=NewTime_;
 		I++;
 		if(I<Line_.size())

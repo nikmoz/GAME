@@ -3,12 +3,11 @@
 #include <utility>
 #include "Game.h"
 
-TargetScene::TargetScene(std::vector<TargetSceneDef::TargetPtr> Targets)
-{
+
+TargetScene::TargetScene(std::vector<TargetSceneDef::TargetPtr> Targets,std::shared_ptr<class TargetAction> Action): Action_(std::move(Action)) {
 	Characters=std::move(Targets);
 	TargetInputHandler_ = std::make_unique<InputHandler>();
 	TargetInputHandler_->Subscribe(this);
-
 }
 
 TargetScene::TargetScene(const TargetScene& Target)
@@ -19,7 +18,7 @@ TargetScene::TargetScene(const TargetScene& Target)
 	TargetInputHandler_ = std::make_unique<InputHandler>();
 	TargetInputHandler_->Subscribe(this);
 
-
+	Action_=Target.Action_;
 	CurrentTarget_=Target.CurrentTarget_;
 }
 
@@ -28,11 +27,12 @@ void TargetScene::Update(const sf::Keyboard::Key Key)
 {
 	const auto TargetIndex = ChooseTarget(Key);
 
-	if (TargetIndex == -1) {
+	if (!TargetIndex.has_value()) {
 		return;
 	}
 
-	std::cout << "Target Name:" << Characters.at(TargetIndex)->Name << std::endl;
+	Action_->Resolve(Characters.at(TargetIndex.value()));
+	
 	Unload();
 
 }
@@ -54,7 +54,7 @@ void TargetScene::Unload()
 	Game::SceneStack.pop_front();
 }
 
-int TargetScene::ChooseTarget(const sf::Keyboard::Key Key)
+std::optional<int> TargetScene::ChooseTarget(const sf::Keyboard::Key Key)
 {
 
 	if (Key == sf::Keyboard::Left)
@@ -63,7 +63,7 @@ int TargetScene::ChooseTarget(const sf::Keyboard::Key Key)
 		{
 			CurrentTarget_--;
 		}
-		return -1;
+		return std::nullopt;
 	}
 
 	if (Key == sf::Keyboard::Right)
@@ -72,12 +72,12 @@ int TargetScene::ChooseTarget(const sf::Keyboard::Key Key)
 		{
 			CurrentTarget_++;
 		}
-		return -1;
+		return std::nullopt;
 	}
 
 	if (Key == sf::Keyboard::Enter)
 	{
 		return CurrentTarget_;
 	}
-	return -1;
+	return std::nullopt;
 }

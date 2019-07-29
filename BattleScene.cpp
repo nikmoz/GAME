@@ -66,7 +66,7 @@ void BattleScene::AddCharacter(SceneDef::TargetPtr&& Character) noexcept
 	Root 3: Separated Scene and render means InputHandler code duplication(Solved)
 */
 
-BattleSceneDef::ActionPtr BattleScene::ChooseAction(const sf::Keyboard::Key Key) const
+std::optional<BattleSceneDef::ActionPtr> BattleScene::ChooseAction(const sf::Keyboard::Key Key) const
 //TODO(Nick):Read about Factory method
 {
 	//static auto I(0U);
@@ -86,7 +86,7 @@ BattleSceneDef::ActionPtr BattleScene::ChooseAction(const sf::Keyboard::Key Key)
 		return ExecuteAction_;
 	}
 
-	return nullptr;
+	return std::nullopt;
 };
 
 void BattleScene::Update(const sf::Keyboard::Key Key)
@@ -94,13 +94,13 @@ void BattleScene::Update(const sf::Keyboard::Key Key)
 
 	auto TurnAction = ChooseAction(Key);
 
-	if (TurnAction == nullptr) { 
+	if (!TurnAction.has_value()) { 
 		return;
 	}
 
-	TurnAction->Execute(*Characters.at(CurrentChar_));
+	TurnAction.value()->Execute(*Characters.at(CurrentChar_));
 
-	if (TurnAction==ExecuteAction_)
+	if (TurnAction.value()==ExecuteAction_)
 	{
 		Characters.at(CurrentChar_)->Graphic->LoadAnimation(AnimationState::Idle);
 		CurrentChar_++;
