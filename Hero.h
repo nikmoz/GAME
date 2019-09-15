@@ -6,6 +6,7 @@
 #include "TagXMLParser.h"
 #include "Action.h"
 
+
 class Action;
 
 namespace HeroDef {

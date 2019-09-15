@@ -1,9 +1,8 @@
 #include "Game.h"
 
-
 int main()
 {
-	Game::InitScene();
+	Game::InitGame();
 	Game::StartGame();
 
 	return 0;

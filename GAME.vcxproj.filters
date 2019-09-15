@@ -38,15 +38,6 @@
     <ClCompile Include="StateNode.cpp">
       <Filter>Wheels\StateMachine</Filter>
     </ClCompile>
-    <ClCompile Include="ExecuteAction.cpp">
-      <Filter>Actions</Filter>
-    </ClCompile>
-    <ClCompile Include="NextAction.cpp">
-      <Filter>Actions</Filter>
-    </ClCompile>
-    <ClCompile Include="PrevAction.cpp">
-      <Filter>Actions</Filter>
-    </ClCompile>
     <ClCompile Include="GraphicHero.cpp">
       <Filter>Graphic</Filter>
     </ClCompile>
@@ -102,15 +93,6 @@
     </ClInclude>
     <ClInclude Include="TagXMLParser.h">
       <Filter>Wheels</Filter>
-    </ClInclude>
-    <ClInclude Include="ExecuteAction.h">
-      <Filter>Actions</Filter>
-    </ClInclude>
-    <ClInclude Include="NextAction.h">
-      <Filter>Actions</Filter>
-    </ClInclude>
-    <ClInclude Include="PrevAction.h">
-      <Filter>Actions</Filter>
     </ClInclude>
     <ClInclude Include="GraphicHero.h">
       <Filter>Graphic</Filter>

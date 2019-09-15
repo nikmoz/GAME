@@ -1,7 +1,7 @@
 #include "DialogScene.h"
 
 
-void DialogScene::UpdateScene()
+void DialogScene::UpdateScene(sf::Keyboard::Key)
 {
 }
 

@@ -11,7 +11,7 @@ public:
 	~TargetAction()=default;
 	virtual void Execute(Hero& Actor) override;
 	virtual void ChooseTargets(Hero& Actor);
-	virtual void Resolve(const std::shared_ptr<Hero>& Targets);
+	virtual void Resolve(const std::shared_ptr<Hero>& Targets, Hero& Actor);
 private:
 	std::vector<std::shared_ptr<Hero>> PossibleTargets_ = {};
 };

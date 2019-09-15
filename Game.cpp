@@ -1,28 +1,30 @@
 #include "Game.h"
 
-#include "BattleScene.h" //NOTE(Nick): Stays here before I can make state machine for SceneChanging
+#include "BattleScene.h" 
 
 
-
-std::deque<GameDef::ScenePtr> Game::SceneStack{};
+std::unique_ptr<InputHandler> Game::InputPtr_ = std::make_unique<InputHandler>();
+std::deque<GameDef::ScenePtr> Game::SceneDeque{};
 
 void Game::StartGame() 
 {
-
 	while (true)
 	{
-		for(const auto& Scene:SceneStack)
+		auto Key=Game::InputPtr_->HandleInput();
+		if(Key!=sf::Keyboard::Unknown)
 		{
-			Scene->Redraw();
+			Game::SceneDeque.front()->UpdateScene(Key);
 		}
-		Game::SceneStack.front()->UpdateScene();
+
+		Game::SceneDeque.front()->Redraw();
 	}
 };
 
-void Game::InitScene()
+void Game::InitGame()
 {
 
-	Game::SceneStack.push_back(std::make_shared<BattleScene>());
+	Game::SceneDeque.push_back(std::make_shared<BattleScene>());
 
-	Game::SceneStack.front()->Load("res/xml/Scene.xml");
-};
+	Game::SceneDeque.front()->Load("res/xml/Scene.xml");
+}
+

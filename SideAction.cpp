@@ -8,4 +8,6 @@ void SideAction::Execute(Hero& Actor) {
 	{
 		std::cout << "Enemy" << std::endl;
 	}
+
+	Actor.Graphic->LoadAnimation(AnimationState::Idle);
 }

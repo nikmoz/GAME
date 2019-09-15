@@ -1,33 +1,15 @@
 #include "InputHandler.h"
-std::map<sf::Keyboard::Key,KeyState> InputHandler::Key_={};
 
 InputHandler::InputHandler()
 {
-	if (Key_.empty())
+	for (auto I=0; I<sf::Keyboard::KeyCount;I++)
 	{
-		for (auto I=0; I<sf::Keyboard::KeyCount;I++)
-		{
-			Key_[static_cast<sf::Keyboard::Key>(I)]=KeyState::Released;
-		}
+		Key_[static_cast<sf::Keyboard::Key>(I)]=KeyState::Released;
 	}
 }
 
-
-void InputHandler::Notify(const sf::Keyboard::Key Key) 
+sf::Keyboard::Key InputHandler::HandleInput()
 {
-	for (auto& Sub :Subs) {
-		Sub->Update(Key);
-	}
-}
-
-void InputHandler::Subscribe(Observer* Sub)
-{
-	Subs.push_back(Sub);
-}
-
-void InputHandler::HandleInput()
-{
-
 	for(auto I=0; I<sf::Keyboard::KeyCount;I++)
 	{
 		auto Key=static_cast<sf::Keyboard::Key>(I);
@@ -37,7 +19,7 @@ void InputHandler::HandleInput()
 			if (Key_[Key]==KeyState::Released)
 			{
 				Key_[Key]=KeyState::Pressed;
-				InputHandler::Notify(Key);
+				return Key;
 			}
 		}
 		else
@@ -45,5 +27,5 @@ void InputHandler::HandleInput()
 			Key_[Key]=KeyState::Released;
 		}
 	}
-	
+	return sf::Keyboard::Unknown;
 }

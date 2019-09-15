@@ -3,6 +3,7 @@
 #include "Render.h"
 #include <vector>
 
+#include <SFML/Window/Keyboard.hpp>
 
 namespace SceneDef
 {
@@ -13,11 +14,10 @@ namespace SceneDef
 class Scene
 {
 public:
-
 	virtual ~Scene()=default;
-	std::vector<SceneDef::TargetPtr> Characters;
+	std::vector<SceneDef::TargetPtr> Characters={};
 
-	virtual void UpdateScene()=0;
+	virtual void UpdateScene(sf::Keyboard::Key)=0;
 	virtual void Redraw()=0;//NOTE(Nick):Figure out if I still need Redraw in MVS approach
 	virtual void Load(std::string_view FileName)=0;
 	virtual void Unload()=0;

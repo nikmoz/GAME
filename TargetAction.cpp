@@ -4,13 +4,13 @@
 void TargetAction::Execute(Hero& Actor)
 {
 	ChooseTargets(Actor);
-	auto TScene= std::make_shared<TargetScene>(PossibleTargets_,std::make_shared<TargetAction>(*this));
+	auto TScene= std::make_shared<TargetScene>(PossibleTargets_,std::make_shared<TargetAction>(*this),Actor);
 	TScene->Load("");
 }
 
 void TargetAction::ChooseTargets(Hero& Actor)
 {
-	for (auto& Char : Game::SceneStack.front()->Characters)
+	for (auto& Char : Game::SceneDeque.front()->Characters)
 	{
 		if (Char->Side != Actor.Side)
 		{
@@ -19,7 +19,9 @@ void TargetAction::ChooseTargets(Hero& Actor)
 	}
 }
 
-inline void TargetAction::Resolve(const std::shared_ptr<Hero>& Targets)
+inline void TargetAction::Resolve(const std::shared_ptr<Hero>& Targets, Hero& Actor)
 {
-	std::cout << "Target Name:" << Targets->Name << std::endl;
+	std::cout <<Actor.Name<< " hits "<< Targets->Name << std::endl;
+
+	Actor.Graphic->LoadAnimation(AnimationState::Idle);
 }

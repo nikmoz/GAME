@@ -3,13 +3,9 @@
 #include "Dialog.h"
 #include "Action.h"
 
+#define SCENE_CURRENT_CHAR Characters.at(CurrentChar_)
 
-BattleScene::BattleScene()
-{
-
-	TurnInputHandler_ = std::make_shared<class InputHandler>();
-	TurnInputHandler_->Subscribe(this);
-}
+BattleScene::BattleScene() = default;
 
 void BattleScene::AddCharacter(SceneDef::TargetPtr&& Character) noexcept
 {
@@ -66,54 +62,52 @@ void BattleScene::AddCharacter(SceneDef::TargetPtr&& Character) noexcept
 	Root 3: Separated Scene and render means InputHandler code duplication(Solved)
 */
 
-std::optional<BattleSceneDef::ActionPtr> BattleScene::ChooseAction(const sf::Keyboard::Key Key) const
+std::optional<unsigned int> BattleScene::ChooseAction(const sf::Keyboard::Key Key)
 //TODO(Nick):Read about Factory method
 {
 	if (Key==sf::Keyboard::Down)
 	{
-		return NextAction_;
+		if (CurrentAction_< SCENE_CURRENT_CHAR->Actions.size()-1)
+		{
+			CurrentAction_++;
+		}
 	}
 
 	if (Key ==sf::Keyboard::Up)
 	{
-		return PrevAction_;
+		if (CurrentAction_ > 0)
+		{
+			CurrentAction_--;
+		}
 	}
 
 	if (Key == sf::Keyboard::Enter)
 	{
-		return ExecuteAction_;
+		return CurrentAction_;
 	}
 
 	return std::nullopt;
 };
 
-void BattleScene::Update(const sf::Keyboard::Key Key)
+void BattleScene::UpdateScene(const sf::Keyboard::Key Key)
 {
+	const auto TurnAction = ChooseAction(Key);
 
-	auto TurnAction = ChooseAction(Key);
-
-	if (!TurnAction.has_value()) { 
+	if (!TurnAction.has_value()) {
 		return;
 	}
 
-	TurnAction.value()->Execute(*Characters.at(CurrentChar_));
 
-	if (TurnAction.value()==ExecuteAction_)
+	SCENE_CURRENT_CHAR->Actions.at(CurrentAction_)->Execute(*SCENE_CURRENT_CHAR);
+
+	CurrentChar_++;
+	if (CurrentChar_ >= Characters.size())
 	{
-		Characters.at(CurrentChar_)->Graphic->LoadAnimation(AnimationState::Idle);
-		CurrentChar_++;
-		if (CurrentChar_ >= Characters.size())
-		{
-			CurrentChar_ = 0;
-		}
-
+		CurrentChar_ = 0;
 	}
-};
+	SCENE_CURRENT_CHAR->Graphic->LoadAnimation(AnimationState::Chosen);
 
-void BattleScene::UpdateScene()
-{
-	Characters.at(CurrentChar_)->Graphic->LoadAnimation(AnimationState::Chosen);
-	TurnInputHandler_->HandleInput();
+	CurrentAction_ = 0;
 };
 
 void BattleScene::Redraw()
@@ -141,7 +135,6 @@ void BattleScene::Load(std::string_view FileName)//TODO(Nick): Figure out normal
 	SetupCharactersPosition();
 
 	this->Characters.at(CurrentChar_)->Graphic->LoadAnimation(AnimationState::Chosen);
-
 
 	SceneFile.close();
 }
